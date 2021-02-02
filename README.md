@@ -8,3 +8,9 @@ With 34% of the illiteracy rate of the world, building a book donation app is on
 - Pickup location
 - Subject or Book type (school book/university study material/magazine or novel)
 - Upload the picture of book to determine the condition
+
+## Reference UI Design
+
+![](https://github.com/infiniteoverflow/Book-Donation-App/blob/main/appui.png)
+
+Source : Dribble
