@@ -14,3 +14,6 @@ An App Built using flutter using which we can share books with people around us 
 ## Tentative UI Design
 
 ![](mock.png)
+
+**This project is a part of Girlscript Summer of Code 21'**
+![](https://miro.medium.com/max/1400/1*c4YgRXYQayOVWxV37ourrw.png)
