@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({this.title}) ;
 
   final String title;
 
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Text(
-          "Welcome to the App !!"
+          "Welcome to the App  !!"
         ),
       ),
     );
