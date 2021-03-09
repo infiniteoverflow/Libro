@@ -34,21 +34,21 @@ class IntroductionState extends State<Introduction>{
                         ),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width*0.05,
+                        width: MediaQuery.of(context).size.width*0.01,
                       ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: MediaQuery.of(context).size.height * 0.03,),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.02,),
                             Align(
-                              alignment: Alignment(-0.30,-1.50),
+                              alignment: Alignment(-0.050,-1.50),
                               child: Text("Libro",
-                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 45, fontFamily: 'IrishGrover' ),),
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 55, fontFamily: 'IrishGrover' ),),
                             ),
-                            SizedBox(height: 15,),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
                             Text("Get your favourite\n      books from\n  people like you!!",
-                              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,fontFamily: 'IrishGrover'),)
+                              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,fontFamily: 'IrishGrover'),)
                           ],
                         ),
                       ),
