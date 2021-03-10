@@ -1,9 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:book_donation/Utils/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginPage extends StatefulWidget {
 
+  // ignore: file_names
   @override
   _LoginPageState createState() => _LoginPageState();
 }
