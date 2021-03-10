@@ -11,9 +11,16 @@ An App Built using flutter using which we can share books with people around us 
 - Search based on Book Type or Author or Location
 - Upload the picture of book to determine the condition
 
+## Contributing 
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the project.
+
+To follow our sprints and workflow install [zenhub extension](https://www.zenhub.com/extension) to access our board.
+
+
 ## Tentative UI Design
 
 ![](mock.png)
 
 **This project is a part of Girlscript Summer of Code 21'**
 ![](https://miro.medium.com/max/1400/1*c4YgRXYQayOVWxV37ourrw.png)
+
