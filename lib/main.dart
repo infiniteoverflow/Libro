@@ -1,4 +1,7 @@
+import 'package:book_donation/Utils/Styles.dart';
+import 'package:book_donation/Screens/intro_screen.dart';
 import 'package:flutter/material.dart';
+import 'Screens/Login_Screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,35 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Book Donation App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Styles.colorCustom,
       ),
-      home: MyHomePage(title: 'Homepage'),
+      home:LoginPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({this.title}) ;
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Text(
-          "Welcome to the App  !!"
-        ),
-      ),
-    );
-  }
-}
