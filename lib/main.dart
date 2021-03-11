@@ -2,9 +2,11 @@ import 'package:book_donation/Utils/Styles.dart';
 import 'package:book_donation/Screens/intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'Screens/Login_Screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(MyApp());
+  Firebase.initializeApp();// Initialize the Firebase App
 }
 
 class MyApp extends StatelessWidget {
