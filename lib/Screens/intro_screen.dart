@@ -1,5 +1,7 @@
 import 'package:book_donation/Screens/Login_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 class Introduction extends StatefulWidget{
   @override
@@ -85,9 +87,12 @@ class IntroductionState extends State<Introduction>{
                             topRight: Radius.circular(35.0) )
                       ),
                       color: Colors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 113.8),
-                      child: const Text(
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 143.8),
+                      child: const AutoSizeText(
                         'CONTINUE',
+                        maxFontSize: 26,
+                        minFontSize: 20,
+                        maxLines: 1,
                         style: TextStyle(
                           fontFamily: 'HanaleiFill',
                           fontSize: 35.0,
@@ -95,8 +100,7 @@ class IntroductionState extends State<Introduction>{
                         ),
                       ),
                     ),
-                  )
-
+                  ),
                 ],
               ),
             ),
