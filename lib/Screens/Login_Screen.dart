@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_donation/Screens/home_screen.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
+import 'package:book_donation/Services/facebook_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: file_names
@@ -311,14 +312,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.15,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/fb.png"),
-                      fit: BoxFit.cover),
+              InkWell(
+                onTap: (){
+                  handleFacebookSignin().then((signInDone) {
+                    if(signInDone)
+                      {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen(isFacebookSignIn: true);
+                            },
+                          ),
+                        );
+                      };
+                  });
+                },
+                child:Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/fb.png"),
+                        fit: BoxFit.cover),
+                  ),
                 ),
               ),
               Container(
@@ -527,7 +544,22 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               ),
-              Container(
+              InkWell(
+                  onTap: (){
+                    handleFacebookSignin().then((signInDone) {
+                      if(signInDone)
+                      {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen(isFacebookSignIn: true);
+                            },
+                          ),
+                        );
+                      };
+                    });
+                  },
+                child:Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.15,
                 decoration: BoxDecoration(
@@ -536,6 +568,7 @@ class _LoginPageState extends State<LoginPage> {
                       image: AssetImage("assets/images/fb.png"),
                       fit: BoxFit.cover),
                 ),
+              )
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
