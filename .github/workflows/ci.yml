@@ -1,4 +1,4 @@
-name: "Flutter/Dart Lint Check"
+name: "Flutter Test and Build"
 
 on: pull_request
 
@@ -20,3 +20,31 @@ jobs:
       - run: flutter pub get
       - name: Lint
         run: flutter analyze
+      - name: Unit test
+        run: flutter test
+  build-Android:
+    name: Build Android apk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: Build apk package
+        run: flutter build apk --release
+  build-iOS:
+    name: Build iOS package
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: build iOS package
+        run: flutter build ios --release --no-codesign
