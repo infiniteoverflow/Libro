@@ -16,6 +16,8 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contrib
 
 To follow our sprints and workflow install [zenhub extension](https://www.zenhub.com/extension) to access our board.
 
+**You can access the google-services.json file from here :** https://drive.google.com/file/d/1xLvwVTZQ3EWYl1uBna2IPp46hsjBQ8ul/view?usp=sharing
+
 
 ## Tentative UI Design
 
