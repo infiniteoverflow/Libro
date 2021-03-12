@@ -1,9 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:book_donation/Utils/Styles.dart';
+import'package:book_donation/Utils/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:book_donation/Screens/home_screen.dart';
+import 'package:book_donation/Services/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: file_names
@@ -282,14 +284,31 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height * 0.03,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.068,
-                width: MediaQuery.of(context).size.width * 0.14,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
+              InkWell(
+                onTap: (){
+                  signInWithGoogle().then(
+                        (result) {
+                      if (result != null) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen();
+                            },
+                          ),
+                        );
+                      };
+                    },
+                  );
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.068,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
                       image: AssetImage("assets/images/google.png"),
                       fit: BoxFit.cover),
+                  ),
                 ),
               ),
               Container(
@@ -481,7 +500,23 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height * 0.015,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              Container(
+              InkWell(
+                onTap: (){
+                  signInWithGoogle().then(
+                        (result) {
+                      if (result != null) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen();
+                            },
+                          ),
+                        );
+                      };
+                    },
+                  );
+                  },
+              child: Container(
                 height: MediaQuery.of(context).size.height * 0.068,
                 width: MediaQuery.of(context).size.width * 0.14,
                 decoration: BoxDecoration(
@@ -490,6 +525,7 @@ class _LoginPageState extends State<LoginPage> {
                       image: AssetImage("assets/images/google.png"),
                       fit: BoxFit.cover),
                 ),
+              ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
