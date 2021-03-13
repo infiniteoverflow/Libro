@@ -1,7 +1,8 @@
+import 'package:book_donation/Models/preferences.dart';
 import 'package:book_donation/Screens/Login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
+import 'package:hive/hive.dart';
 
 class Introduction extends StatefulWidget{
   @override
@@ -80,6 +81,9 @@ class IntroductionState extends State<Introduction>{
                     // ignore: deprecated_member_use
                     child: RaisedButton(
                       onPressed: (){
+                        Hive.box('preferences').put(0, Preferences(
+                          firstTime: false,
+                        ));
                         Navigator.push(context, MaterialPageRoute(builder:
                         (context) => LoginPage()));
                       },
