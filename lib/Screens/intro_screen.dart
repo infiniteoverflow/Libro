@@ -76,6 +76,7 @@ class IntroductionState extends State<Introduction>{
                   SizedBox(height:MediaQuery.of(context).size.height * 0.041),
                   // ignore: avoid_unnecessary_containers
                   Container(
+                    margin: EdgeInsets.only(bottom: 30.0, top: 10.0),
                     // ignore: deprecated_member_use
                     child: RaisedButton(
                       onPressed: (){
@@ -87,11 +88,11 @@ class IntroductionState extends State<Introduction>{
                             topRight: Radius.circular(35.0) )
                       ),
                       color: Colors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 143.8),
+                      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 143.8),
                       child: const AutoSizeText(
                         'CONTINUE',
-                        maxFontSize: 26,
-                        minFontSize: 20,
+                        maxFontSize: 36,
+                        minFontSize: 21,
                         maxLines: 1,
                         style: TextStyle(
                           fontFamily: 'HanaleiFill',
