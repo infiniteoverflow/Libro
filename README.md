@@ -12,7 +12,7 @@ An App Built using flutter using which we can share books with people around us 
 - Upload the picture of book to determine the condition
 
 ## Contributing 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the project.
+Please read [CONTRIBUTING.md](https://github.com/infiniteoverflow/Libro/blob/main/Contributing.md) for information on how to contribute to the project.
 
 To follow our sprints and workflow install [zenhub extension](https://www.zenhub.com/extension) to access our board.
 
