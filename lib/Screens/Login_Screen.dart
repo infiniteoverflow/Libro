@@ -254,6 +254,10 @@ class _LoginPageState extends State<LoginPage> {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     } else {
                       FirebaseAuth.instance.signOut();
                       notify(context, "Log-in Problem",

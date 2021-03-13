@@ -31,6 +31,7 @@ dependencies:
   lint: ^1.0.0
   path_provider: ^2.0.1
   hive: ^2.0.0
+  google_fonts: ^2.0.0-nullsafety.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,15 +56,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/authBG 1.png
-    - assets/images/google.png
-    - assets/images/fb.png
-    - assets/images/twitter.png
-    - assets/images/arrowImage1.png
-#   - images/a_dot_burr.jpeg
-    - assets/images/Reading 1.png
-    - assets/images/Sharing 1.png
-#   - images/a_dot_ham.jpeg
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
