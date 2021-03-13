@@ -1,4 +1,4 @@
-name: "Flutter Test and Build"
+name: "Analyze and Test"
 
 on: pull_request
 
@@ -35,16 +35,8 @@ jobs:
           channel: 'stable'
       - name: Build apk package
         run: flutter build apk --release
-  build-iOS:
-    name: Build iOS package
-    runs-on: macOS-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
+      - uses: actions/upload-artifact@v1
         with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: 'stable'
-      - name: build iOS package
-        run: flutter build ios --release --no-codesign
+          name: release-apk
+          path: build/app/outputs/apk/release
+        
