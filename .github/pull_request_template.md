@@ -14,7 +14,4 @@
 - [ ] Change In Code
 - [ ] Change In Documentation
 
-### Screenshots
-Before this PR            | After this PR
-:-----------------------: | :-----------------------:
-** Original Screenshot ** | ** Updated Screenshot **
+### Screenshots (Optional)
