@@ -60,31 +60,25 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.012,
-                  ),
                   Row(
                     children: [
                       SafeArea(
                         child: GestureDetector(
                           child: Container(
-                            height: 35,
+                            height: 0,
                             width: 40,
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/arrowImage1.png"),
-                                    fit: BoxFit.cover)),
+                            ),
                           ),
                           onTap: (){
-                            Navigator.pop(context);
+                            
                           },
                         ),
                       ),
                     ],
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.21,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       image: AssetImage("assets/images/authBG 1.png"),
@@ -254,6 +248,10 @@ class _LoginPageState extends State<LoginPage> {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     } else {
                       FirebaseAuth.instance.signOut();
                       notify(context, "Log-in Problem",

@@ -31,6 +31,19 @@
     	<key>NSAllowsLocalNetworking</key>
     	<true/>
 	</dict>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<!-- TODO Replace this value: -->
+    			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+    			<string>com.googleusercontent.apps.830997207202-bqqjvkon1toeoeberckf2pecestq18bv</string>
+    		</array>
+    	</dict>
+    </array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
