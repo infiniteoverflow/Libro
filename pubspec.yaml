@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -23,11 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_switch: ^0.1.6-beta.1
-  firebase_core: ^1.0.1
+  cupertino_icons: ^1.0.0
   firebase_auth: ^1.0.1
-  google_sign_in:
-  flutter_facebook_login:
+  firebase_core: ^1.0.1
+  flutter_facebook_login: null
+  flutter_switch: ^0.1.6-beta.1
+  google_sign_in: null
+  hive: ^2.0.0
+  hive_flutter: ^1.0.0
   lint: ^1.0.0
   path_provider: ^2.0.1
   hive: ^2.0.0
@@ -41,14 +44,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  analyzer: ^1.1.0
+  build_runner: null
+  hive_generator: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -60,10 +63,8 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -80,7 +81,6 @@ flutter:
     - family: HanaleiFill
       fonts:
         - asset: assets/fonts/HanaleiFill-Regular.ttf
-
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
