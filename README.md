@@ -19,3 +19,15 @@ To follow our sprints and workflow install [zenhub extension](https://www.zenhub
 **This project is a part of Girlscript Summer of Code 21'**
 ![](https://miro.medium.com/max/1400/1*c4YgRXYQayOVWxV37ourrw.png)
 
+## Contributors:
+### Credit goes to this people:✨
+<table>
+	<tr>
+		<td>
+			<a href="https://github.com/infiniteoverflow/Libro/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=infiniteoverflow/Libro" />
+</a>
+		</td>
+	</tr>
+</table>
+
