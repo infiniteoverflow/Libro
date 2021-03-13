@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.0
   firebase_auth: ^1.0.1
   firebase_core: ^1.0.1
   flutter_facebook_login: null
@@ -31,6 +30,7 @@ dependencies:
   google_sign_in: null
   hive: ^2.0.0
   hive_flutter: ^1.0.0
+  google_fonts: ^2.0.0
   lint: ^1.0.0
 
 
