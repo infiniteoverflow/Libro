@@ -26,7 +26,6 @@ dependencies:
   flutter_switch: ^0.1.6-beta.1
   firebase_core: ^1.0.1
   firebase_auth: ^1.0.1
-  cloud_firestore: ^1.0.1
   google_sign_in:
   flutter_facebook_login:
   lint: ^1.0.0
