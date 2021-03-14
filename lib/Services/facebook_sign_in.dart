@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+
 FirebaseAuth _auth = FirebaseAuth.instance;
 FacebookLogin facebookLogin = FacebookLogin();
 Future<bool> handleFacebookSignin() async {
@@ -11,7 +12,7 @@ Future<bool> handleFacebookSignin() async {
       return false;
     case FacebookLoginStatus.error:
       print("There was an error for facebook Sign in");
-     return false;
+      return false;
     case FacebookLoginStatus.loggedIn:
       try {
         await signinWithFacebook(result);
@@ -21,17 +22,21 @@ Future<bool> handleFacebookSignin() async {
         return false;
       }
       break;
+    default:
+      return false;
   }
 }
+
 Future<void> signinWithFacebook(FacebookLoginResult result) async {
   //get access token
   final FacebookAccessToken accessToken = result.accessToken;
 
   //Convert to Auth Credential
-  AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
+  final AuthCredential credential =
+      FacebookAuthProvider.credential(accessToken.token);
 
   //User Credential to Sign in with Firebase
-  var a = await _auth.signInWithCredential(credential);
+  final a = await _auth.signInWithCredential(credential);
   print("${a.user.displayName} logged in with facebook");
 }
 
@@ -40,4 +45,3 @@ Future<void> facebookLogout() async {
     facebookLogin.logOut();
   });
 }
-

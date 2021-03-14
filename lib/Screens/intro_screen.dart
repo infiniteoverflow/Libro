@@ -26,17 +26,14 @@ class IntroductionState extends State<Introduction> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 0.0, left: 0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.27,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage("assets/images/Reading 1.png"),
-                        fit: BoxFit.cover,
-                      )),
-                    ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.27,
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage("assets/images/Reading 1.png"),
+                      fit: BoxFit.cover,
+                    )),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.01,
