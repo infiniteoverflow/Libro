@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:book_donation/Screens/home_screen.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
+import 'package:book_donation/Screens/email_verification_screen.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: file_names
@@ -252,11 +253,11 @@ class _LoginPageState extends State<LoginPage> {
                     } else {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (_) => EmailVerificationScreen(),
+                          builder: (context) => EmailVerificationScreen(),
                         ),
                       );
-                      notify(context, "Log-in Problem",
-                          "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
+                      // notify(context, "Log-in Problem",
+                      //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
                   }).catchError((e) {
                     if (e.toString() ==

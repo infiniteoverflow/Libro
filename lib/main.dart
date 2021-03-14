@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'Models/preferences.dart';
-import 'package:book_donation/Screens/email_verification_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +46,6 @@ class _MyAppState extends State<MyApp> {
               primarySwatch: Styles.colorCustom,
             ),
             home: (preferences.firstTime) ? Introduction() : LoginPage(),
-            //  home: EmailVerificationScreen(),
           );
         });
   }
