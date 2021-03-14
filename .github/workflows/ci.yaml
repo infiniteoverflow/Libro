@@ -3,7 +3,7 @@ name: "Build and Release apk"
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   build-Android:
