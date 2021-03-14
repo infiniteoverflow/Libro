@@ -7,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'Models/preferences.dart';
-
+import 'package:book_donation/Screens/email_verification_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,18 +36,19 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return WatchBoxBuilder(
-      box: Hive.box('preferences'), 
-      builder: (context,box) {
-        Preferences preferences = box.get(0,defaultValue: Preferences(firstTime: true));
-        return MaterialApp(
-          title: 'Book Donation App',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Styles.colorCustom,
-          ),
-          home: (preferences.firstTime)? Introduction() : LoginPage(),
-        );
-      }
-    );
+        box: Hive.box('preferences'),
+        builder: (context, box) {
+          Preferences preferences =
+              box.get(0, defaultValue: Preferences(firstTime: true));
+          return MaterialApp(
+            title: 'Book Donation App',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Styles.colorCustom,
+            ),
+            home: (preferences.firstTime) ? Introduction() : LoginPage(),
+            //  home: EmailVerificationScreen(),
+          );
+        });
   }
 }
