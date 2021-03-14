@@ -1,12 +1,15 @@
-import 'package:book_donation/Utils/Styles.dart';
-import 'package:book_donation/Screens/intro_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'Screens/Login_Screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:book_donation/Utils/Styles.dart';
+// import 'package:book_donation/Screens/intro_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import './router/route_constants.dart';
+import './router/router.dart' as route;
 import 'Models/preferences.dart';
+// import 'Screens/Login_Screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,15 +40,18 @@ class _MyAppState extends State<MyApp> {
     return WatchBoxBuilder(
         box: Hive.box('preferences'),
         builder: (context, box) {
-          Preferences preferences =
-              box.get(0, defaultValue: Preferences(firstTime: true));
+          final Preferences preferences = box.get(0,
+              defaultValue: Preferences(firstTime: true)) as Preferences;
           return MaterialApp(
             title: 'Book Donation App',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Styles.colorCustom,
             ),
-            home: (preferences.firstTime) ? Introduction() : LoginPage(),
+            onGenerateRoute: route.Router().generateRoute,
+            initialRoute:
+                (preferences.firstTime) ? introductionRoute : loginRoute,
+            // home: (preferences.firstTime) ? Introduction() : LoginPage(),
           );
         });
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:book_donation/Services/google_sign_in.dart';
-import 'intro_screen.dart';
-import 'package:book_donation/Services/facebook_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+// import 'package:book_donation/Services/google_sign_in.dart';
+// import 'intro_screen.dart';
+// import 'package:book_donation/Services/facebook_sign_in.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool isFacebookSignIn;
@@ -24,11 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          child: TextField(
+          child: const TextField(
             style: TextStyle(
               fontSize: 14,
               color: Colors.black,
@@ -52,228 +51,223 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Container(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/books-bg.jpg',
-                  fit: BoxFit.cover,
-                  height: 250,
-                  width: double.infinity,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Image.asset(
+                'assets/images/books-bg.jpg',
+                fit: BoxFit.cover,
+                height: 250,
+                width: double.infinity,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.lime[20]),
                 ),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.lime[20]),
+              )
+            ],
+          ),
+          /*Container(
+            decoration: BoxDecoration(color: Colors.black38),
+          ),*/
+          SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 130,
                   ),
-                )
-              ],
-            ),
-            /*Container(
-              decoration: BoxDecoration(color: Colors.black38),
-            ),*/
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 130,
+                  // first block
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 8.0,
+                          spreadRadius: 0.5,
+                          offset: Offset(
+                            -1.0,
+                            8.0,
+                          ), // shadow direction: bottom right
+                        ),
+                      ],
                     ),
-                    // first block
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 8.0,
-                            spreadRadius: 0.5,
-                            offset: Offset(
-                              -1.0,
-                              8.0,
-                            ), // shadow direction: bottom right
-                          ),
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(20, 30, 20, 25),
-                      child: Column(
-                        children: [
-                          // first text block
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Discover new',
-                                    style: GoogleFonts.lora(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    'see all',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.blueGrey[300],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Hunt new books before other bookworms do it...',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.blueGrey[300],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // Books row
-                          Container(
-                            height: 250,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 25),
+                    child: Column(
+                      children: [
+                        // first text block
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                BookItemWidget('Milk & Honey',
-                                    'assets/images/book1.jpg', 'Rupi Kaur'),
-                                BookItemWidget(
-                                    'Becoming',
-                                    'assets/images/book2.jpeg',
-                                    'Michelle Obama'),
-                                BookItemWidget('The Engineer',
-                                    'assets/images/book3.jpeg', 'Donald Trump'),
+                                Text(
+                                  'Discover new',
+                                  style: GoogleFonts.lora(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  'see all',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.blueGrey[300],
+                                  ),
+                                ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    // second block
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Categories',
-                              style: GoogleFonts.lora(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
+                            const SizedBox(
+                              height: 5,
                             ),
                             Text(
-                              'see all',
+                              'Hunt new books before other bookworms do it...',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.blueGrey[300],
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 5,
+                        const SizedBox(
+                          height: 20,
                         ),
-                        Container(
-                          height: 170,
+                        // Books row
+                        SizedBox(
+                          height: 250,
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: [
-                              CategoryItemWidget(
-                                'Architecture',
-                                208,
-                                Icons.architecture,
-                              ),
-                              CategoryItemWidget(
-                                'Design',
-                                57,
-                                Icons.design_services,
-                              ),
-                              CategoryItemWidget(
-                                'Poem',
-                                29,
-                                Icons.animation,
-                              ),
+                            children: const [
+                              BookItemWidget('Milk & Honey',
+                                  'assets/images/book1.jpg', 'Rupi Kaur'),
+                              BookItemWidget('Becoming',
+                                  'assets/images/book2.jpeg', 'Michelle Obama'),
+                              BookItemWidget('The Engineer',
+                                  'assets/images/book3.jpeg', 'Donald Trump'),
                             ],
                           ),
-                        ),
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    // third block
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Trending',
-                              style: GoogleFonts.lora(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  // second block
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Categories',
+                            style: GoogleFonts.lora(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
                             ),
-                            Text(
-                              'see all',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blueGrey,
-                              ),
+                          ),
+                          Text(
+                            'see all',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blueGrey[300],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      SizedBox(
+                        height: 170,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: const [
+                            CategoryItemWidget(
+                              'Architecture',
+                              208,
+                              Icons.architecture,
+                            ),
+                            CategoryItemWidget(
+                              'Design',
+                              57,
+                              Icons.design_services,
+                            ),
+                            CategoryItemWidget(
+                              'Poem',
+                              29,
+                              Icons.animation,
                             ),
                           ],
                         ),
-                        Container(
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  // third block
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Trending',
+                            style: GoogleFonts.lora(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
                           ),
+                          const Text(
+                            'see all',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.blueGrey,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class BookItemWidget extends StatelessWidget {
-  String author, name, img;
+  final String author, name, img;
 
-  BookItemWidget(this.name, this.img, this.author);
+  const BookItemWidget(this.name, this.img, this.author);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
       height: 210,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       child: Column(
@@ -293,7 +287,7 @@ class BookItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
@@ -304,12 +298,12 @@ class BookItemWidget extends StatelessWidget {
               color: Colors.blueGrey[300],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -322,25 +316,26 @@ class BookItemWidget extends StatelessWidget {
 }
 
 class CategoryItemWidget extends StatelessWidget {
-  String category;
-  int number;
-  IconData icon;
-  Color color = Colors.greenAccent;
+  final String category;
+  final int number;
+  final IconData icon;
 
-  CategoryItemWidget(this.category, this.number, this.icon);
+  const CategoryItemWidget(this.category, this.number, this.icon);
 
   @override
   Widget build(BuildContext context) {
+    const Color color = Colors.greenAccent;
+
     // TODO: implement build
     return Container(
       height: 130,
       width: 160,
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 10.0,
@@ -362,15 +357,15 @@ class CategoryItemWidget extends StatelessWidget {
           ),
           Text(
             category,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w800,
               color: color,
             ),
           ),
           Text(
-            number.toString() + ' books',
-            style: TextStyle(
+            '${number.toString()} books',
+            style: const TextStyle(
               fontSize: 14,
               fontStyle: FontStyle.italic,
               color: color,

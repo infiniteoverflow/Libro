@@ -4,10 +4,12 @@ import 'package:book_donation/Utils/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:book_donation/Screens/home_screen.dart';
+// import 'package:book_donation/Screens/home_screen.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
 import 'package:book_donation/Screens/email_verification_screen.dart';
+
+import '../router/route_constants.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: file_names
@@ -65,19 +67,19 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       SafeArea(
                         child: GestureDetector(
+                          onTap: () {},
                           child: Container(
                             height: 0,
                             width: 40,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                           ),
-                          onTap: () {},
                         ),
                       ),
                     ],
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.21,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         image: DecorationImage(
                       image: AssetImage("assets/images/authBG 1.png"),
                     )),
@@ -90,12 +92,12 @@ class _LoginPageState extends State<LoginPage> {
             top: 255,
             bottom: 0,
             child: Container(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               height: 500,
               width: MediaQuery.of(context).size.width - 0,
               decoration: BoxDecoration(
                 color: Styles.scaffoldColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(45.0),
                     topRight: Radius.circular(45.0)),
               ),
@@ -105,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
+                        const Text(
                           "Login",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -114,19 +116,17 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         FlutterSwitch(
                           width: 90.0,
-                          height: 35.0,
                           toggleSize: 20.0,
                           value: isSwitched,
                           borderRadius: 25.0,
                           padding: 7.0,
-                          showOnOff: false,
                           onToggle: (val) {
                             setState(() {
                               isSwitched = val;
                             });
                           },
                         ),
-                        Text(
+                        const Text(
                           "SignUp",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     //for switching login and signUp screen
-                    isSwitched == false ? login() : signUp()
+                    if (isSwitched == false) login() else signUp()
                   ],
                 ),
               ),
@@ -161,10 +161,11 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (mail) {
-                  if (mail.length == 0)
+                  if (mail.isEmpty) {
                     return "Please Give a Valid Email";
-                  else if (mail.contains('@') && mail.contains('.com'))
+                  } else if (mail.contains('@') && mail.contains('.com')) {
                     return null;
+                  }
                   return "Not an Email Structure";
                 },
                 controller: loginEmailAddress,
@@ -213,8 +214,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   suffixIcon: IconButton(
                     icon: showPassword
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility), //for show and hide password
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(
+                            Icons.visibility), //for show and hide password
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
@@ -231,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height * 0.08,
               minWidth: MediaQuery.of(context).size.width * 0.84,
               shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () {
                 if (_logInFormKey.currentState.validate()) {
@@ -240,31 +242,25 @@ class _LoginPageState extends State<LoginPage> {
                           email: loginEmailAddress.text,
                           password: loginPassword.text)
                       .then((signedInUser) {
-                    bool response =
+                    final bool response =
                         FirebaseAuth.instance.currentUser.emailVerified;
                     if (response) {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      Navigator.pushNamed(context, homeRoute);
                     } else {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => EmailVerificationScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, emailVerificationRoute);
+
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
                   }).catchError((e) {
                     if (e.toString() ==
-                        "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.")
+                        "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
                       notify(context, "Log-in Problem",
                           "Account Not Found...Please Sign-up at first and then try it");
-                    else {
+                    } else {
                       notify(context, "Log-in Problem",
                           "Unknown Error at Log-in...Try Again");
                     }
@@ -276,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.03,
             ),
-            Text(
+            const Text(
               "OR",
               style: TextStyle(
                   fontSize: 23, fontWeight: FontWeight.bold, fontFamily: "Jua"),
@@ -290,22 +286,15 @@ class _LoginPageState extends State<LoginPage> {
                   signInWithGoogle().then(
                     (result) {
                       if (result != null) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomeScreen();
-                            },
-                          ),
-                        );
+                        Navigator.pushNamed(context, homeRoute);
                       }
-                      ;
                     },
                   );
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.068,
                   width: MediaQuery.of(context).size.width * 0.14,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         image: AssetImage("assets/images/google.png"),
@@ -317,21 +306,14 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: () {
                   handleFacebookSignin().then((signInDone) {
                     if (signInDone) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return HomeScreen(isFacebookSignIn: true);
-                          },
-                        ),
-                      );
+                      Navigator.pushNamed(context, homeRoute, arguments: true);
                     }
-                    ;
                   });
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.15,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         image: AssetImage("assets/images/fb.png"),
@@ -342,7 +324,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.15,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image: AssetImage("assets/images/twitter.png"),
@@ -370,10 +352,11 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (mail) {
-                  if (mail.length == 0)
+                  if (mail.isEmpty) {
                     return "Please Give a Valid Email";
-                  else if (mail.contains('@') && mail.contains('.com'))
+                  } else if (mail.contains('@') && mail.contains('.com')) {
                     return null;
+                  }
                   return "Not an Email Structure";
                 },
                 controller: signUpEmailAddress,
@@ -422,8 +405,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   suffixIcon: IconButton(
                     icon: showPassword
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility), //for show and hide password
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(
+                            Icons.visibility), //for show and hide password
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
@@ -440,11 +424,12 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (conformPwd) {
-                  if (conformPwd.length < 6)
+                  if (conformPwd.length < 6) {
                     return "Password at least 6 characters";
-                  else if (signUpPassword.text.length > 5 &&
-                      signUpPassword.text != signUpConfirmPassword.text)
+                  } else if (signUpPassword.text.length > 5 &&
+                      signUpPassword.text != signUpConfirmPassword.text) {
                     return "Password and Confirm Password are not Same";
+                  }
                   return null;
                 },
                 controller: signUpConfirmPassword,
@@ -465,8 +450,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   suffixIcon: IconButton(
                     icon: showPassword
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility), //for show and hide password
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(
+                            Icons.visibility), //for show and hide password
                     onPressed: () {
                       setState(() {
                         showPassword = !showPassword;
@@ -483,14 +469,14 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height * 0.08,
               minWidth: MediaQuery.of(context).size.width * 0.84,
               shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(20.0)),
+                  borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
                 if (_signUpFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
-                          email: this.signUpEmailAddress.text,
-                          password: this.signUpPassword.text)
+                          email: signUpEmailAddress.text,
+                          password: signUpPassword.text)
                       .then((signedUpUser) async {
                     await signedUpUser.user.sendEmailVerification();
                     notify(context, "Congrats! Sign up Complete",
@@ -509,7 +495,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            Text(
+            const Text(
               "OR",
               style: TextStyle(
                   fontSize: 23, fontWeight: FontWeight.bold, fontFamily: "Jua"),
@@ -523,22 +509,15 @@ class _LoginPageState extends State<LoginPage> {
                   signInWithGoogle().then(
                     (result) {
                       if (result != null) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomeScreen();
-                            },
-                          ),
-                        );
+                        Navigator.pushNamed(context, homeRoute);
                       }
-                      ;
                     },
                   );
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.068,
                   width: MediaQuery.of(context).size.width * 0.14,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         image: AssetImage("assets/images/google.png"),
@@ -550,21 +529,15 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     handleFacebookSignin().then((signInDone) {
                       if (signInDone) {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return HomeScreen(isFacebookSignIn: true);
-                            },
-                          ),
-                        );
+                        Navigator.pushNamed(context, homeRoute,
+                            arguments: true);
                       }
-                      ;
                     });
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.15,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           image: AssetImage("assets/images/fb.png"),
@@ -574,7 +547,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.15,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image: AssetImage("assets/images/twitter.png"),
