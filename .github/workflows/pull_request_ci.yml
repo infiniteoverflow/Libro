@@ -20,8 +20,6 @@ jobs:
       - run: flutter pub get
       - name: Lint
         run: flutter analyze
-      - name: Unit test
-        run: flutter test
   build-Android:
     name: Build Android apk
     runs-on: ubuntu-latest
