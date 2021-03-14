@@ -104,7 +104,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, homeRoute);
+                Navigator.pushNamed(context, homeRoute);
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(

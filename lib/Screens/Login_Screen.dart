@@ -250,11 +250,8 @@ class _LoginPageState extends State<LoginPage> {
                           "Enjoy this app");
                       Navigator.pushNamed(context, homeRoute);
                     } else {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => EmailVerificationScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, emailVerificationRoute);
+
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
@@ -289,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
                   signInWithGoogle().then(
                     (result) {
                       if (result != null) {
-                        Navigator.pushReplacementNamed(context, homeRoute);
+                        Navigator.pushNamed(context, homeRoute);
                       }
                     },
                   );
@@ -309,8 +306,7 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: () {
                   handleFacebookSignin().then((signInDone) {
                     if (signInDone) {
-                      Navigator.pushReplacementNamed(context, homeRoute,
-                          arguments: true);
+                      Navigator.pushNamed(context, homeRoute, arguments: true);
                     }
                   });
                 },
@@ -513,7 +509,7 @@ class _LoginPageState extends State<LoginPage> {
                   signInWithGoogle().then(
                     (result) {
                       if (result != null) {
-                        Navigator.pushReplacementNamed(context, homeRoute);
+                        Navigator.pushNamed(context, homeRoute);
                       }
                     },
                   );
@@ -533,7 +529,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     handleFacebookSignin().then((signInDone) {
                       if (signInDone) {
-                        Navigator.pushReplacementNamed(context, homeRoute,
+                        Navigator.pushNamed(context, homeRoute,
                             arguments: true);
                       }
                     });

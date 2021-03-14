@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Screens/Login_Screen.dart';
+import '../Screens/email_verification_screen.dart';
 import '../Screens/home_screen.dart';
 import '../Screens/intro_screen.dart';
 import './route_constants.dart';
@@ -10,6 +11,9 @@ class Router {
     switch (settings.name) {
       case loginRoute:
         return MaterialPageRoute(builder: (_) => LoginPage());
+
+      case emailVerificationRoute:
+        return MaterialPageRoute(builder: (_) => EmailVerificationScreen());
 
       case introductionRoute:
         return MaterialPageRoute(builder: (_) => Introduction());
