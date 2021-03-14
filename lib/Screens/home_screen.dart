@@ -4,7 +4,6 @@ import 'intro_screen.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class HomeScreen extends StatefulWidget {
   final bool isFacebookSignIn;
 
@@ -293,7 +292,7 @@ class BookItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
