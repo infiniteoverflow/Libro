@@ -9,7 +9,11 @@ Please read [CONTRIBUTING.md](https://github.com/infiniteoverflow/Libro/blob/mai
 
 To follow our sprints and workflow install [zenhub extension](https://www.zenhub.com/extension) to access our board.
 
-**You can access the google-services.json file from here :** https://drive.google.com/file/d/1xLvwVTZQ3EWYl1uBna2IPp46hsjBQ8ul/view?usp=sharing
+**Google Services Files for running the app :**   
+
+**For Android :** https://drive.google.com/file/d/1xLvwVTZQ3EWYl1uBna2IPp46hsjBQ8ul/view?usp=sharing
+
+**For IOS :** https://drive.google.com/file/d/1Ldd2BefPp8EOU-pffbxMLc-IXwPlc8XX/view?usp=sharing
 
 
 ## Tentative UI Design
