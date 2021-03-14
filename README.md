@@ -2,14 +2,7 @@
 An App Built using flutter using which we can share books with people around us !!
 
 # Tech Stack
-- Flutter
-- Firebase
-
-### Important Features to be added
-- Signup for donor and receiver
-- Dashboard
-- Search based on Book Type or Author or Location
-- Upload the picture of book to determine the condition
+<img alt="Dart" src="https://img.shields.io/badge/dart-%230175C2.svg?&style=for-the-badge&logo=dart&logoColor=white" width="300" height="100"/>  <img alt="Flutter" src="https://img.shields.io/badge/Flutter%20-%2302569B.svg?&style=for-the-badge&logo=Flutter&logoColor=white" width="300" height="100" /> <img alt="Firebase" src="https://img.shields.io/badge/firebase%20-%23039BE5.svg?&style=for-the-badge&logo=firebase" width="300" height="100"/>
 
 ## Contributing 
 Please read [CONTRIBUTING.md](https://github.com/infiniteoverflow/Libro/blob/main/Contributing.md) for information on how to contribute to the project.
@@ -25,4 +18,16 @@ To follow our sprints and workflow install [zenhub extension](https://www.zenhub
 
 **This project is a part of Girlscript Summer of Code 21'**
 ![](https://miro.medium.com/max/1400/1*c4YgRXYQayOVWxV37ourrw.png)
+
+## Contributors:
+### Credit goes to this people:✨
+<table>
+	<tr>
+		<td>
+			<a href="https://github.com/infiniteoverflow/Libro/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=infiniteoverflow/Libro" />
+</a>
+		</td>
+	</tr>
+</table>
 

@@ -1,6 +1,7 @@
 import 'package:book_donation/Models/preferences.dart';
 import 'package:book_donation/Screens/Login_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:hive/hive.dart';
 
 class Introduction extends StatefulWidget{
@@ -76,6 +77,7 @@ class IntroductionState extends State<Introduction>{
                   SizedBox(height:MediaQuery.of(context).size.height * 0.041),
                   // ignore: avoid_unnecessary_containers
                   Container(
+                    margin: EdgeInsets.only(bottom: 30.0, top: 10.0),
                     // ignore: deprecated_member_use
                     child: RaisedButton(
                       onPressed: (){
@@ -90,9 +92,12 @@ class IntroductionState extends State<Introduction>{
                             topRight: Radius.circular(35.0) )
                       ),
                       color: Colors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 113.8),
-                      child: const Text(
+                      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 143.8),
+                      child: const AutoSizeText(
                         'CONTINUE',
+                        maxFontSize: 36,
+                        minFontSize: 21,
+                        maxLines: 1,
                         style: TextStyle(
                           fontFamily: 'HanaleiFill',
                           fontSize: 35.0,
@@ -100,8 +105,7 @@ class IntroductionState extends State<Introduction>{
                         ),
                       ),
                     ),
-                  )
-
+                  ),
                 ],
               ),
             ),

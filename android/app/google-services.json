@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "830997207202",
+    "project_id": "libro-bd6c8",
+    "storage_bucket": "libro-bd6c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830997207202:android:cbab08a21d0c664ad89ffb",
+        "android_client_info": {
+          "package_name": "com.example.book_donation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830997207202-iv874fdai871kjml4d0edu5f8camonnt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.book_donation",
+            "certificate_hash": "bf34e98df3553a4fb82b8bb218b90afc45447736"
+          }
+        },
+        {
+          "client_id": "830997207202-03n77jfck7m0efilmo201ifaavqll2kf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMaIUS2fOiRhitI5udLkzEvuRsZoVRFk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830997207202-03n77jfck7m0efilmo201ifaavqll2kf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
