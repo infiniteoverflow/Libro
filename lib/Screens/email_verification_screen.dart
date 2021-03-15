@@ -24,10 +24,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Image.asset(
-            'assets/images/verify1.png',
-            height: 550,
-            width: 300,
+          Expanded(
+            child: Image.asset(
+              'assets/images/verify1.png',
+              fit: BoxFit.contain,
+            ),
           ),
           const Text(
             'Verify your email before continuing !!',
@@ -75,6 +76,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
             ),
           ),
+          SizedBox(height: 10),
         ],
       ),
     );
