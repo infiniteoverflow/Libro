@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './chat_screen.dart';
+import './profile_screen.dart';
+import './notifs_screen.dart';
 // import 'package:book_donation/Services/google_sign_in.dart';
 // import 'intro_screen.dart';
 // import 'package:book_donation/Services/facebook_sign_in.dart';
@@ -16,7 +19,154 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    MediaQueryData _mediaQueryData = MediaQuery.of(context);
+    double _height = _mediaQueryData.size.height;
+    double _width = _mediaQueryData.size.width;
+
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: EdgeInsets.all(7),
+        decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8.0,
+              spreadRadius: 1,
+              offset: Offset(
+                0.0,
+                5.0,
+              ),
+            ),
+          ],
+          color: Colors.blue,
+          borderRadius: BorderRadius.all(
+            Radius.circular(40),
+          ),
+        ),
+        width: _width * 0.9,
+        height: 60,
+        child: Row(
+          children: [
+            // Chat Button
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return ChatScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Icon(
+                        Icons.chat_sharp,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        'Chat',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Profile Button
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return ProfileScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        'Profile',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Notifications Button
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return NotifsScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Icon(
+                        Icons.notifications,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        'Notifs',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
