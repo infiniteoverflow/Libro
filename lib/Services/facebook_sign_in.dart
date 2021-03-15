@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
@@ -17,7 +18,8 @@ Future<bool> handleFacebookSignin() async {
       try {
         await signinWithFacebook(result);
         return true;
-      } catch (e) {
+      } catch (e, s) {
+        FirebaseCrashlytics.instance.recordError(e.toString(), s);
         print(e);
         return false;
       }

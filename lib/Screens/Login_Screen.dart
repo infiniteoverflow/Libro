@@ -1,13 +1,15 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:book_donation/Utils/Styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:book_donation/Screens/home_screen.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
-import 'package:book_donation/Screens/email_verification_screen.dart';
+// import 'package:book_donation/Screens/email_verification_screen.dart';
+// import 'package:book_donation/Screens/home_screen.dart';
 
 import '../router/route_constants.dart';
 
@@ -107,6 +109,15 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        // TODO:
+                        /// Crash the app once to set up crashlytics in firebase
+                        /// to be done on iOS (uncomment below iconbutton wiget and crashlytics import at the top)
+
+                        // IconButton(
+                        //     icon: const Icon(Icons.dangerous),
+                        //     onPressed: () {
+                        //       FirebaseCrashlytics.instance.crash();
+                        //     }),
                         const Text(
                           "Login",
                           style: TextStyle(
@@ -255,7 +266,8 @@ class _LoginPageState extends State<LoginPage> {
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
-                  }).catchError((e) {
+                  }).catchError((e, StackTrace s) {
+                    FirebaseCrashlytics.instance.recordError(e.toString(), s);
                     if (e.toString() ==
                         "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
                       notify(context, "Log-in Problem",
@@ -481,7 +493,8 @@ class _LoginPageState extends State<LoginPage> {
                     await signedUpUser.user.sendEmailVerification();
                     notify(context, "Congrats! Sign up Complete",
                         "Please Log-In to Continue");
-                  }).catchError((e) {
+                  }).catchError((e, StackTrace s) {
+                    FirebaseCrashlytics.instance.recordError(e.toString(), s);
                     if (e.toString() ==
                         "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
                       notify(context, "Sorry! Account Conflict",

@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   firebase_auth: ^1.0.1
   firebase_core: ^1.0.1
+  firebase_crashlytics: ^1.0.0
   flutter_facebook_login: null
   flutter_switch: ^0.1.6-beta.1
   google_sign_in: null
