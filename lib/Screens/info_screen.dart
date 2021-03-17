@@ -62,7 +62,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         bottom: 0,
                         right: 110,
                         child: Container(
-                          height: _height * 0.045,
+                          height: _height * 0.044,
                           width: _height * 0.05,
                           decoration: BoxDecoration(
                             color: Styles.colorCustom,
