@@ -43,7 +43,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     children: [
                       // Profile picture
                       Container(
-                        height: _height * 0.2,
+                        height: _height * 0.16,
                         decoration: const BoxDecoration(
                           color: Colors.grey,
                           shape: BoxShape.circle,
@@ -52,17 +52,17 @@ class _InfoScreenState extends State<InfoScreen> {
                           child: Icon(
                             Icons.person,
                             color: Colors.white54,
-                            size: 100,
+                            size:80,
                           ),
                         ),
                       ),
 
                       // Plus button
                       Positioned(
-                        right: 105,
-                        top: 85,
+                        bottom: 0,
+                        right: 110,
                         child: Container(
-                          height: _height * 0.05,
+                          height: _height * 0.045,
                           width: _height * 0.05,
                           decoration: BoxDecoration(
                             color: Styles.colorCustom,
