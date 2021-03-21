@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import './chat_screen.dart';
 import './profile_screen.dart';
 import './notifs_screen.dart';
+import 'package:ionicons/ionicons.dart';
 // import 'package:book_donation/Services/google_sign_in.dart';
 // import 'intro_screen.dart';
 // import 'package:book_donation/Services/facebook_sign_in.dart';
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ],
-          color: Colors.blue,
+          color: Colors.blue[500],
           borderRadius: BorderRadius.all(
             Radius.circular(40),
           ),
@@ -65,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       flex: 3,
                       child: Icon(
-                        Icons.chat_sharp,
+                        Ionicons.chatbubble,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -104,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       flex: 3,
                       child: Icon(
-                        Icons.person,
+                        Ionicons.person_circle,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       flex: 3,
                       child: Icon(
-                        Icons.notifications,
+                        Ionicons.notifications_circle,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -186,12 +187,12 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: Icon(
-                Icons.search,
+                Ionicons.search_outline,
                 color: Colors.grey,
                 size: 28,
               ),
               suffixIcon: Icon(
-                Icons.public,
+                Ionicons.earth,
                 color: Colors.grey,
                 size: 28,
               ),
