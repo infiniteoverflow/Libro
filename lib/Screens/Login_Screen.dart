@@ -396,7 +396,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (pwd) {
-                  if (pwd.length < 6) return "Password at least 6 characters";
+                  if (pwd.length < 6) return "Password must be at least 6 characters long";
                   return null;
                 },
                 controller: signUpPassword,
@@ -437,7 +437,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 validator: (conformPwd) {
                   if (conformPwd.length < 6) {
-                    return "Password at least 6 characters";
+                    return "Password must be at least 6 characters long";
                   } else if (signUpPassword.text.length > 5 &&
                       signUpPassword.text != signUpConfirmPassword.text) {
                     return "Password and Confirm Password are not Same";
@@ -484,7 +484,6 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
-                if (_signUpFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                           email: signUpEmailAddress.text,
@@ -495,13 +494,13 @@ class _LoginPageState extends State<LoginPage> {
                         "Please Log-In to Continue");
                   }).catchError((e, StackTrace s) {
                     FirebaseCrashlytics.instance.recordError(e.toString(), s);
-                    if (e.toString() ==
-                        "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
-                      notify(context, "Sorry! Account Conflict",
-                          "Same Account Already Registered...Try Another Account");
-                    }
+
+                    if(e.toString().contains('[firebase_auth/email-already-in-use]'))
+                      notify(context, 'Email in Use', 'Use another Email to Sign Up');
+
+                    if(e.toString().contains('[firebase_auth/weak-password]')) 
+                      notify(context, 'Weak password', 'Password must be at least 6 characters long');
                   });
-                }
               },
               child: Text('SIGN-UP', style: Styles.button()),
             ),
