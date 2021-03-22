@@ -4,6 +4,7 @@ import './chat_screen.dart';
 import './profile_screen.dart';
 import './notifs_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:book_donation/Services/google_sign_in.dart';
 // import 'intro_screen.dart';
 // import 'package:book_donation/Services/facebook_sign_in.dart';
@@ -25,8 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime) > Duration(seconds: 2)) {
       currentBackPressTime = now;
+      Fluttertoast.showToast(
+        msg: "Press again to exit",
+      );
       return Future.value(false);
     }
+    Fluttertoast.cancel();
     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     return Future.value(true);
   }
