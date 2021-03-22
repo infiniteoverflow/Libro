@@ -574,13 +574,74 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // void notify(BuildContext context, String _title, String _content) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text(_title),
+  //           content: Text(_content),
+  //         );
+  //       });
+  // }
+
   void notify(BuildContext context, String _title, String _content) {
+    final height = MediaQuery.of(context).size.height;
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text(_title),
-            content: Text(_content),
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ), //this right here
+            child: Container(
+              height: height/5,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       border: InputBorder.none,
+                    //       hintText: 'What do you want to remember?'),
+                    // ),
+                    Row(
+                      children: [
+                        Spacer(),
+                        CloseButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left:10,right:10,bottom:10),
+                      child: Text(
+                        _title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    //Text(_title),
+                    Padding(
+                      padding: EdgeInsets.only(left:10,right:10,bottom:6),
+                      child: Text(
+                        _content,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }
