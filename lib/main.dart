@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import './router/route_constants.dart';
 import './router/router.dart' as route;
 import 'Models/preferences.dart';
+import 'package:book_donation/splash_screen.dart';
 // import 'Screens/Login_Screen.dart';
 
 Future<void> main() async {
