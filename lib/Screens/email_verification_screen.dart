@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:book_donation/Screens/home_screen.dart';
+// import 'package:book_donation/Screens/home_screen.dart';
+
+import '../router/route_constants.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   @override
@@ -12,7 +14,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   final auth = FirebaseAuth.instance;
   User user;
   @override
-  initState() {
+  void initState() {
+    super.initState();
     user = auth.currentUser;
   }
 
@@ -21,12 +24,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Image.asset(
-            'assets/images/verify1.png',
-            height: 550,
-            width: 300,
+          Expanded(
+            child: Image.asset(
+              'assets/images/verify1.png',
+              fit: BoxFit.contain,
+            ),
           ),
-          Text(
+          const Text(
             'Verify your email before continuing !!',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -36,26 +40,31 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
             'We have sent a mail to ${user.email}',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontFamily: "Jua",
               color: Colors.black,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           MaterialButton(
             onPressed: checkEmailVerified,
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 8, bottom: 8, left: 50, right: 50),
+            height: 60,
+            minWidth: 200,
+            color: const Color(0xff00B0FF),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 8, left: 50, right: 50),
               child: Text(
                 'CONTINUE',
                 style: TextStyle(
@@ -66,13 +75,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
               ),
             ),
-            height: 60,
-            minWidth: 200,
-            color: Color(0xff00B0FF),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
           ),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -85,12 +89,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          backgroundColor: Color(0xff00B0FF),
+          backgroundColor: const Color(0xff00B0FF),
           title: Image.asset(
             'assets/images/verified.png',
             height: 100,
           ),
-          content: Text(
+          content: const Text(
             'You have successfully verified your email',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -102,14 +106,15 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (_) => HomeScreen(),
-                  ),
-                );
+                Navigator.pushNamed(context, homeRoute);
               },
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   'CONTINUE',
                   style: TextStyle(
@@ -118,11 +123,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     color: Colors.black,
                     fontFamily: "Jua",
                   ),
-                ),
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Colors.white,
                 ),
               ),
             ),
@@ -134,8 +134,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('You haven\'t Verified your email yet'),
+        const SnackBar(
+          content: Text("You haven't Verified your email yet"),
         ),
       );
     }
