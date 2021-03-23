@@ -28,15 +28,23 @@ dependencies:
   firebase_auth: ^1.0.1
   firebase_core: ^1.0.1
   firebase_crashlytics: ^1.0.0
-  flutter_facebook_login: null
+  flutter_facebook_login: ^3.0.0
   flutter_switch: ^0.1.6-beta.1
   font_awesome_flutter: ^9.0.0
   google_fonts: ^2.0.0
-  google_sign_in: null
+  google_sign_in: ^5.0.1
   hive: ^2.0.0
   hive_flutter: ^1.0.0
-  ionicons: ^0.1.2
+  google_fonts: ^2.0.0
   lint: ^1.0.0
+  fluttertoast: ^8.0.3
+  flutter_native_splash: ^1.1.4+1
+  ionicons: ^0.1.2
+
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
 
 dev_dependencies:
   flutter_test:

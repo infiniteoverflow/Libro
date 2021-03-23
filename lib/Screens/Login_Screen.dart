@@ -396,7 +396,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (pwd) {
-                  if (pwd.length < 6) return "Password at least 6 characters";
+                  if (pwd.length < 6) return "Password must be at least 6 characters long";
                   return null;
                 },
                 controller: signUpPassword,
@@ -437,7 +437,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 validator: (conformPwd) {
                   if (conformPwd.length < 6) {
-                    return "Password at least 6 characters";
+                    return "Password must be at least 6 characters long";
                   } else if (signUpPassword.text.length > 5 &&
                       signUpPassword.text != signUpConfirmPassword.text) {
                     return "Password and Confirm Password are not Same";
@@ -484,7 +484,6 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
-                if (_signUpFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                           email: signUpEmailAddress.text,
@@ -495,13 +494,13 @@ class _LoginPageState extends State<LoginPage> {
                         "Please Log-In to Continue");
                   }).catchError((e, StackTrace s) {
                     FirebaseCrashlytics.instance.recordError(e.toString(), s);
-                    if (e.toString() ==
-                        "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
-                      notify(context, "Sorry! Account Conflict",
-                          "Same Account Already Registered...Try Another Account");
-                    }
+
+                    if(e.toString().contains('[firebase_auth/email-already-in-use]'))
+                      notify(context, 'Email in Use', 'Use another Email to Sign Up');
+
+                    if(e.toString().contains('[firebase_auth/weak-password]')) 
+                      notify(context, 'Weak password', 'Password must be at least 6 characters long');
                   });
-                }
               },
               child: Text('SIGN-UP', style: Styles.button()),
             ),
@@ -574,13 +573,74 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // void notify(BuildContext context, String _title, String _content) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text(_title),
+  //           content: Text(_content),
+  //         );
+  //       });
+  // }
+
   void notify(BuildContext context, String _title, String _content) {
+    final height = MediaQuery.of(context).size.height;
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text(_title),
-            content: Text(_content),
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ), //this right here
+            child: Container(
+              height: height/5,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       border: InputBorder.none,
+                    //       hintText: 'What do you want to remember?'),
+                    // ),
+                    Row(
+                      children: [
+                        Spacer(),
+                        CloseButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left:10,right:10,bottom:10),
+                      child: Text(
+                        _title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    //Text(_title),
+                    Padding(
+                      padding: EdgeInsets.only(left:10,right:10,bottom:6),
+                      child: Text(
+                        _content,
+                        style: TextStyle(
+                          //fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }
