@@ -237,22 +237,22 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: new BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
-                if (_logInFormKey.currentState.validate()) {
-                  await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Logging you in...',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Logging you in...',
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
-                        CircularProgressIndicator(),
-                      ],
-                    ),
-                    duration: Duration(seconds: 7),
-                  ));
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                  duration: Duration(seconds: 7),
+                ));
+                if (_logInFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
                           email: loginEmailAddress.text,
@@ -260,7 +260,8 @@ class _LoginPageState extends State<LoginPage> {
                       .then((signedInUser) {
                     bool response =
                         FirebaseAuth.instance.currentUser.emailVerified;
-
+                    //SnackBar hide
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     if (response) {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
@@ -269,7 +270,6 @@ class _LoginPageState extends State<LoginPage> {
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     } else {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
