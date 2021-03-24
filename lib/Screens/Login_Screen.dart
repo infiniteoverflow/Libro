@@ -36,6 +36,8 @@ class _LoginPageState extends State<LoginPage> {
   final _signUpFormKey = GlobalKey<FormState>();
   final _logInFormKey = GlobalKey<FormState>();
 
+  //for Snack Bar
+
   @override
   void dispose() {
     // Cleaning up controllers of login screen
@@ -159,6 +161,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //For Login Screen
+
   Widget login() {
     return SingleChildScrollView(
       child: Form(
@@ -246,7 +249,22 @@ class _LoginPageState extends State<LoginPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
-              onPressed: () {
+              onPressed: () async {
+                await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Logging you in...',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
+                  duration: Duration(seconds: 7),
+                ));
                 if (_logInFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
@@ -255,14 +273,28 @@ class _LoginPageState extends State<LoginPage> {
                       .then((signedInUser) {
                     final bool response =
                         FirebaseAuth.instance.currentUser.emailVerified;
+                    //SnackBar hide
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     if (response) {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
-                      Navigator.pushNamed(context, homeRoute);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     } else {
-                      Navigator.pushNamed(context, emailVerificationRoute);
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Please Verify Your Email"),
+                        duration: Duration(seconds: 3),
+                      ));
 
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => EmailVerificationScreen(),
+                        ),
+                      );
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
@@ -272,10 +304,29 @@ class _LoginPageState extends State<LoginPage> {
                         "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
                       notify(context, "Log-in Problem",
                           "Account Not Found...Please Sign-up at first and then try it");
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
                     } else {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       notify(context, "Log-in Problem",
                           "Unknown Error at Log-in...Try Again");
                     }
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Login Failed, Try Again Later",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Icon(
+                            Icons.error,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                        ],
+                      ),
+                      duration: Duration(seconds: 3),
+                    ));
                   });
                 }
               },
