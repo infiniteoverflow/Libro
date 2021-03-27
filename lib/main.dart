@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:book_donation/Utils/Styles.dart';
@@ -23,8 +24,10 @@ Future<void> main() async {
 
   await Hive.openBox('preferences');
 
+  await Firebase.initializeApp(); // Initialize the Firebase App
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
   runApp(MyApp());
-  Firebase.initializeApp(); // Initialize the Firebase App
 }
 
 class MyApp extends StatefulWidget {
