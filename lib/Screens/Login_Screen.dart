@@ -8,8 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
-// import 'package:book_donation/Screens/email_verification_screen.dart';
-// import 'package:book_donation/Screens/home_screen.dart';
+import 'package:book_donation/Screens/email_verification_screen.dart';
+import 'package:book_donation/Screens/home_screen.dart';
 
 import '../router/route_constants.dart';
 
@@ -160,6 +160,48 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void loadingSnackBarAndMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            message,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          const CircularProgressIndicator(),
+        ],
+      ),
+      duration: const Duration(seconds: 7),
+    ));
+  }
+
+  void errorSnackBarAndMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            message,
+            style: const TextStyle(fontSize: 18),
+          ),
+          const Icon(
+            Icons.error,
+            color: Colors.red,
+            size: 30,
+          ),
+        ],
+      ),
+      duration: const Duration(seconds: 3),
+    ));
+  }
+
+  void hideSnackBar() {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  }
+
   //For Login Screen
 
   Widget login() {
@@ -176,10 +218,12 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 validator: (mail) {
                   if (mail.isEmpty) {
+                    hideSnackBar();
                     return "Please Give a Valid Email";
                   } else if (mail.contains('@') && mail.contains('.com')) {
                     return null;
                   }
+                  hideSnackBar();
                   return "Not an Email Structure";
                 },
                 controller: loginEmailAddress,
@@ -207,7 +251,10 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (pwd) {
-                  if (pwd.length < 6) return "Password at least 6 characters";
+                  if (pwd.length < 6) {
+                    hideSnackBar();
+                    return "Password at least 6 characters";
+                  }
                   return null;
                 },
                 controller: loginPassword,
@@ -250,21 +297,8 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
-                await ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Logging you in...',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      CircularProgressIndicator(),
-                    ],
-                  ),
-                  duration: Duration(seconds: 7),
-                ));
+                loadingSnackBarAndMessage('Logging you in...');
+
                 if (_logInFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
@@ -273,8 +307,9 @@ class _LoginPageState extends State<LoginPage> {
                       .then((signedInUser) {
                     final bool response =
                         FirebaseAuth.instance.currentUser.emailVerified;
-                    //SnackBar hide
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+                    hideSnackBar();
+
                     if (response) {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
@@ -284,8 +319,8 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     } else {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      hideSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Please Verify Your Email"),
                         duration: Duration(seconds: 3),
                       ));
@@ -304,29 +339,14 @@ class _LoginPageState extends State<LoginPage> {
                         "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
                       notify(context, "Log-in Problem",
                           "Account Not Found...Please Sign-up at first and then try it");
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      hideSnackBar();
                     } else {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      hideSnackBar();
                       notify(context, "Log-in Problem",
                           "Unknown Error at Log-in...Try Again");
                     }
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Login Failed, Try Again Later",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          Icon(
-                            Icons.error,
-                            color: Colors.red,
-                            size: 30,
-                          ),
-                        ],
-                      ),
-                      duration: Duration(seconds: 3),
-                    ));
+
+                    errorSnackBarAndMessage('Login Failed, Try Again Later');
                   });
                 }
               },
@@ -416,10 +436,12 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 validator: (mail) {
                   if (mail.isEmpty) {
+                    hideSnackBar();
                     return "Please Give a Valid Email";
                   } else if (mail.contains('@') && mail.contains('.com')) {
                     return null;
                   }
+                  hideSnackBar();
                   return "Not an Email Structure";
                 },
                 controller: signUpEmailAddress,
@@ -447,7 +469,10 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
                 validator: (pwd) {
-                  if (pwd.length < 6) return "Password must be at least 6 characters long";
+                  if (pwd.length < 6) {
+                    hideSnackBar();
+                    return "Password must be at least 6 characters long";
+                  }
                   return null;
                 },
                 controller: signUpPassword,
@@ -488,9 +513,11 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 validator: (conformPwd) {
                   if (conformPwd.length < 6) {
+                    hideSnackBar();
                     return "Password must be at least 6 characters long";
                   } else if (signUpPassword.text.length > 5 &&
                       signUpPassword.text != signUpConfirmPassword.text) {
+                    hideSnackBar();
                     return "Password and Confirm Password are not Same";
                   }
                   return null;
@@ -535,23 +562,34 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
-                  FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: signUpEmailAddress.text,
-                          password: signUpPassword.text)
-                      .then((signedUpUser) async {
-                    await signedUpUser.user.sendEmailVerification();
-                    notify(context, "Congrats! Sign up Complete",
-                        "Please Log-In to Continue");
-                  }).catchError((e, StackTrace s) {
-                    FirebaseCrashlytics.instance.recordError(e.toString(), s);
+                loadingSnackBarAndMessage('Signing you up...');
+                FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                        email: signUpEmailAddress.text,
+                        password: signUpPassword.text)
+                    .then((signedUpUser) async {
+                  await signedUpUser.user.sendEmailVerification();
+                  hideSnackBar();
+                  notify(context, "Congrats! Sign up Complete",
+                      "Please Log-In to Continue");
+                }).catchError((e, StackTrace s) {
+                  FirebaseCrashlytics.instance.recordError(e.toString(), s);
 
-                    if(e.toString().contains('[firebase_auth/email-already-in-use]'))
-                      notify(context, 'Email in Use', 'Use another Email to Sign Up');
+                  if (e
+                      .toString()
+                      .contains('[firebase_auth/email-already-in-use]')) {
+                    notify(context, 'Email in Use',
+                        'Use another Email to Sign Up');
+                  }
 
-                    if(e.toString().contains('[firebase_auth/weak-password]')) 
-                      notify(context, 'Weak password', 'Password must be at least 6 characters long');
-                  });
+                  if (e.toString().contains('[firebase_auth/weak-password]')) {
+                    notify(context, 'Weak password',
+                        'Password must be at least 6 characters long');
+                  }
+
+                  hideSnackBar();
+                  errorSnackBarAndMessage('Signup Failed, Try Again Later');
+                });
               },
               child: Text('SIGN-UP', style: Styles.button()),
             ),
@@ -645,7 +683,7 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(20.0),
             ), //this right here
             child: Container(
-              height: height/5,
+              height: height / 5,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Column(
@@ -668,7 +706,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left:10,right:10,bottom:10),
+                      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                       child: Text(
                         _title,
                         style: TextStyle(
@@ -679,7 +717,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     //Text(_title),
                     Padding(
-                      padding: EdgeInsets.only(left:10,right:10,bottom:6),
+                      padding: EdgeInsets.only(left: 10, right: 10, bottom: 6),
                       child: Text(
                         _content,
                         style: TextStyle(
