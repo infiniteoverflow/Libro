@@ -8,8 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:book_donation/Services/google_sign_in.dart';
 import 'package:book_donation/Services/facebook_sign_in.dart';
-// import 'package:book_donation/Screens/email_verification_screen.dart';
-// import 'package:book_donation/Screens/home_screen.dart';
+import 'package:book_donation/Screens/email_verification_screen.dart';
+import 'package:book_donation/Screens/home_screen.dart';
 
 import '../router/route_constants.dart';
 
