@@ -318,14 +318,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ListView(
                               scrollDirection: Axis.horizontal,
                               children: const [
-                                BookItemWidget('Milk & Honey',
-                                    'assets/images/book1.jpg', 'Rupi Kaur'),
                                 BookItemWidget(
-                                    'Becoming',
-                                    'assets/images/book2.jpeg',
-                                    'Michelle Obama'),
-                                BookItemWidget('The Engineer',
-                                    'assets/images/book3.jpeg', 'Donald Trump'),
+                                  'Milk & Honey',
+                                  'assets/images/book1.jpg',
+                                  'Rupi Kaur',
+                                ),
+                                BookItemWidget(
+                                  'Becoming',
+                                  'assets/images/book2.jpeg',
+                                  'Michelle Obama',
+                                ),
+                                BookItemWidget(
+                                  'The Engineer',
+                                  'assets/images/book3.jpeg',
+                                  'Donald Trump',
+                                ),
                               ],
                             ),
                           )
@@ -465,23 +472,34 @@ class BookItemWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
-            author,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.blueGrey[300],
+          SizedBox(
+            width: 120,
+            child: Text(
+              author,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              softWrap: false,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.blueGrey[300],
+              ),
             ),
           ),
           const SizedBox(
             height: 5,
           ),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          SizedBox(
+            width: 120,
+            child: Text(
+              name,
+              overflow: TextOverflow.ellipsis,
+              softWrap: false,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ),
         ],
