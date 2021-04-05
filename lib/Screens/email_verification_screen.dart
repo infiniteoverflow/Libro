@@ -33,6 +33,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           const Text(
             'Verify your email before continuing !!',
             style: TextStyle(
+              height: 1.1,
               fontWeight: FontWeight.bold,
               fontSize: 26,
               fontFamily: "Jua",
@@ -41,19 +42,20 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           Text(
             'We have sent a mail to ${user.email}',
             textAlign: TextAlign.center,
             style: const TextStyle(
+              height: 1.1,
               fontSize: 20,
               fontFamily: "Jua",
               color: Colors.black,
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 25,
           ),
           MaterialButton(
             onPressed: checkEmailVerified,
@@ -64,7 +66,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: const Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 8, left: 50, right: 50),
+              padding: EdgeInsets.only(top: 8, bottom: 0, left: 50, right: 50),
               child: Text(
                 'CONTINUE',
                 style: TextStyle(
@@ -76,7 +78,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+         const SizedBox(height: 40),
         ],
       ),
     );
