@@ -1,9 +1,9 @@
 <div align="center">
 
-![Forks](https://img.shields.io/github/forks/pratyushmp/Batua)
-![Stars](https://img.shields.io/github/stars/pratyushmp/Batua)
-![Issues](https://img.shields.io/github/issues/pratyushmp/Batua)
-![Pull Requests](https://img.shields.io/github/issues-pr/pratyushmp/Batua?)
+![Forks](https://img.shields.io/github/forks/infiniteoverflow/Libro)
+![Stars](https://img.shields.io/github/stars/infiniteoverflow/Libro)
+![Issues](https://img.shields.io/github/issues/infiniteoverflow/Libro)
+![Pull Requests](https://img.shields.io/github/issues-pr/infiniteoverflow/Libro?)
 
 
 # 📚Book-Donation-App📚
