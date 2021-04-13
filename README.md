@@ -39,13 +39,6 @@ To follow our sprints and workflow install [zenhub extension](https://www.zenhub
 **This project is a part of Girlscript Summer of Code 21'**
 ![](https://miro.medium.com/max/1400/1*c4YgRXYQayOVWxV37ourrw.png)
 
-## Contributors:🧑‍💻
-
-### Our HardWorking Project Admin👨‍💻
-
-|<img src="https://avatars.githubusercontent.com/u/40236624?v=4">
-|---------|
-|<p align="center">[Pratyush M](https://github.com/infiniteoverflow)</p>|
 
 ### Valuable Contributors🤟
 <table>
