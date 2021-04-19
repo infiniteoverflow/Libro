@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import '../Utils/Styles.dart';
 
 class ProfileScreen extends StatelessWidget {
+
   Widget profileCard() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Color(0xFF343EDB).withAlpha(30),
+            color: Styles.profileBar.withAlpha(30),
             blurRadius: 8.0,
             spreadRadius: 8.0,
           ),
         ],
-        color: Color(0xFF343EDB),
+        color: Styles.profileBar,
       ),
       padding: EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
       width: double.infinity,
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0), color: Colors.white),
             child: Text(
               'Edit',
-              style: TextStyle(color: Color(0xFF343EDB), fontSize: 16),
+              style: TextStyle(color: Styles.profileBar, fontSize: 16),
             ),
           ),
         ],
@@ -91,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Jua',
                       fontSize: 17.0,
-                      color: Color(0xFF38475B),
+                      color: Styles.headingColor,
                       height: 1.5,
                       letterSpacing: 0.25)),
             ],
@@ -143,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                          color: Color(0X95E9EBF0),
+                          color: Styles.shadowColor,
                           blurRadius: 10,
                           spreadRadius: 2)
                     ],
@@ -174,7 +176,7 @@ class ProfileScreen extends StatelessWidget {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                          color: Color(0X95E9EBF0),
+                          color: Styles.shadowColor,
                           blurRadius: 10,
                           spreadRadius: 2)
                     ],
