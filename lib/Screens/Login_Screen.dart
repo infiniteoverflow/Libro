@@ -314,10 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                       print("User Id is: ${signedInUser.user.uid}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
+                      Navigator.pushNamed(context, homeRoute);
                     } else {
                       hideSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -325,11 +322,7 @@ class _LoginPageState extends State<LoginPage> {
                         duration: Duration(seconds: 3),
                       ));
 
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => EmailVerificationScreen(),
-                        ),
-                      );
+                      Navigator.pushReplacementNamed(context,emailVerificationRoute);
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }

@@ -6,6 +6,9 @@ class Styles {
   static Color textField = const Color(0x42000000);
   static Color textFieldBorder = const Color(0x42000000).withOpacity(0.05);
   static MaterialColor colorCustom = MaterialColor(0xff00B0FF, color);
+  static Color profileBar = const Color(0xFF343EDB);
+  static Color headingColor = const Color(0xFF38475B);
+  static Color shadowColor = const Color(0X95E9EBF0);
   //primary swatch color
   static Map<int, Color> color = {
     50: const Color.fromRGBO(0, 176, 255, .1),
