@@ -74,6 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Padding(
                 padding: EdgeInsets.only(left: 8, right: 16),
                 child: Container(
+                  width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
