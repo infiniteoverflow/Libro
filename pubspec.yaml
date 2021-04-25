@@ -36,6 +36,7 @@ dependencies:
   fluttertoast: ^8.0.3
   flutter_native_splash: ^1.1.4+1
   ionicons: ^0.1.2
+  giffy_dialog: ^1.8.0
   emoji_picker: ^0.1.0
 
 
