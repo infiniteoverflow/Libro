@@ -4,6 +4,7 @@ import '../Screens/Login_Screen.dart';
 import '../Screens/email_verification_screen.dart';
 import '../Screens/home_screen.dart';
 import '../Screens/intro_screen.dart';
+import '../Screens/about_libro_screen.dart';
 import './route_constants.dart';
 
 class Router {
@@ -17,6 +18,8 @@ class Router {
 
       case introductionRoute:
         return MaterialPageRoute(builder: (_) => Introduction());
+      case aboutLibro:
+        return MaterialPageRoute(builder: (_) => AboutLibroScreen());
 
       case homeRoute:
         final args = settings.arguments as bool;

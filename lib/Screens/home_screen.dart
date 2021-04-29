@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import './chat_screen.dart';
 import './profile_screen.dart';
 import './notifs_screen.dart';
+import './about_libro_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../router/route_constants.dart';
 // import 'package:book_donation/Services/google_sign_in.dart';
 // import 'intro_screen.dart';
 // import 'package:book_donation/Services/facebook_sign_in.dart';
@@ -45,6 +47,45 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0,
+          //automaticallyImplyLeading: false,
+          iconTheme: IconThemeData(color: Colors.white),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Padding(
+            padding: EdgeInsets.only(right: 13),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: const TextField(
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                    size: 28,
+                  ),
+                  suffixIcon: Icon(
+                    Icons.public,
+                    color: Colors.grey,
+                    size: 28,
+                  ),
+                  hintText: "Search by name, author, bookworm...",
+                ),
+                textAlignVertical: TextAlignVertical.center,
+              ),
+            ),
+          ),
+        ),
+        drawer: MainDrawer(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Container(
           padding: EdgeInsets.all(7),
@@ -189,39 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            child: const TextField(
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black,
-              ),
-              cursorColor: Colors.grey,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                  size: 28,
-                ),
-                suffixIcon: Icon(
-                  Icons.public,
-                  color: Colors.grey,
-                  size: 28,
-                ),
-                hintText: "Search by name, author, bookworm...",
-              ),
-              textAlignVertical: TextAlignVertical.center,
-            ),
-          ),
-        ),
         body: Stack(
           children: [
             Column(
@@ -239,9 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            /*Container(
-            decoration: BoxDecoration(color: Colors.black38),
-          ),*/
             SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(15),
@@ -563,6 +568,72 @@ class CategoryItemWidget extends StatelessWidget {
               fontStyle: FontStyle.italic,
               color: color,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MainDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(30),
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 15),
+            height: 120,
+            width: double.infinity,
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.centerLeft,
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16),
+                bottomRight: Radius.circular(16),
+              ),
+            ),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 28,
+                child: Text("AS"),
+                backgroundColor: Colors.white,
+              ),
+              title: Text(
+                "Ananth Sai",
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25,
+                ),
+              ),
+              subtitle: Text(
+                "ananth@gmail.com",
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          Spacer(),
+          ListTile(
+            leading: Icon(
+              Icons.home,
+              size: 26,
+            ),
+            title: Text(
+              "About Libro",
+              style: TextStyle(
+                fontSize: 24,
+                //fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(AboutLibroScreen.routeName);
+            },
           ),
         ],
       ),
