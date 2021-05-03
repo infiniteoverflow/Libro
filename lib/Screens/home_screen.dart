@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
-  bool _isLoggedin = false;
 
   Future<bool> _onWillPop() {
     DateTime now = DateTime.now();
@@ -47,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     checkAuthentication();
-    getuser();
     super.initState();
   }
 
@@ -64,18 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
     });
-  }
-
-  getuser() async {
-    User firebaseUser = _auth.currentUser;
-    await firebaseUser?.reload();
-    firebaseUser = _auth.currentUser;
-    if (firebaseUser != null) {
-      setState(() {
-        this.user = firebaseUser;
-        _isLoggedin = true;
-      });
-    }
   }
 
   //end of functions for signout
