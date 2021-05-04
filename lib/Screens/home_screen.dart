@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import './chat_screen.dart';
 import './profile_screen.dart';
 import './notifs_screen.dart';
@@ -23,6 +24,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DateTime currentBackPressTime;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  User user;
+
   Future<bool> _onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
@@ -37,6 +41,30 @@ class _HomeScreenState extends State<HomeScreen> {
     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     return Future.value(true);
   }
+
+//functions required for signout
+  @override
+  void initState() {
+    checkAuthentication();
+    super.initState();
+  }
+
+  signOut() async {
+    await _auth.signOut();
+  }
+
+  checkAuthentication() async {
+    _auth.authStateChanges().listen((user) {
+      if (user == null) {
+        Navigator.pushReplacementNamed(
+          context,
+          "/introduction-screen",
+        );
+      }
+    });
+  }
+
+  //end of functions for signout
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        drawer: MainDrawer(),
+        drawer: MainDrawer(signOut),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Container(
           padding: EdgeInsets.all(7),
@@ -576,6 +604,9 @@ class CategoryItemWidget extends StatelessWidget {
 }
 
 class MainDrawer extends StatelessWidget {
+  Function signOut;
+
+  MainDrawer(this.signOut);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -618,6 +649,7 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           Spacer(),
+          Divider(),
           ListTile(
             leading: Icon(
               Icons.home,
@@ -633,6 +665,25 @@ class MainDrawer extends StatelessWidget {
             ),
             onTap: () {
               Navigator.of(context).pushNamed(AboutLibroScreen.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(
+              Icons.logout,
+              size: 26,
+            ),
+            title: Text(
+              "Log Out",
+              style: TextStyle(
+                fontSize: 24,
+                //fontFamily: 'RobotoCondensed',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              signOut();
             },
           ),
         ],
