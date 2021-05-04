@@ -322,7 +322,8 @@ class _LoginPageState extends State<LoginPage> {
                         duration: Duration(seconds: 3),
                       ));
 
-                      Navigator.pushReplacementNamed(context,emailVerificationRoute);
+                      Navigator.pushReplacementNamed(
+                          context, emailVerificationRoute);
                       // notify(context, "Log-in Problem",
                       //     "Please Verify Email at First and then log in...Email Verification Link Send to Your Reistered Mail");
                     }
@@ -427,16 +428,16 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                validator: (mail) {
-                  if (mail.isEmpty) {
-                    hideSnackBar();
-                    return "Please Give a Valid Email";
-                  } else if (mail.contains('@') && mail.contains('.com')) {
-                    return null;
-                  }
-                  hideSnackBar();
-                  return "Not an Email Structure";
-                },
+                // validator: (mail) {
+                //   if (mail.isEmpty) {
+                //     hideSnackBar();
+                //     return "Please Give a Valid Email";
+                //   } else if (mail.contains('@') && mail.contains('.com')) {
+                //     return null;
+                //   }
+                //   hideSnackBar();
+                //   return "Not an Email Structure";
+                // },
                 controller: signUpEmailAddress,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -461,13 +462,13 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                validator: (pwd) {
-                  if (pwd.length < 6) {
-                    hideSnackBar();
-                    return "Password must be at least 6 characters long";
-                  }
-                  return null;
-                },
+                // validator: (pwd) {
+                //   if (pwd.length < 6) {
+                //     hideSnackBar();
+                //     return "Password must be at least 6 characters long";
+                //   }
+                //   return null;
+                // },
                 controller: signUpPassword,
                 obscureText: showPassword,
                 textInputAction: TextInputAction.next,
@@ -504,17 +505,18 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                validator: (conformPwd) {
-                  if (conformPwd.length < 6) {
-                    hideSnackBar();
-                    return "Password must be at least 6 characters long";
-                  } else if (signUpPassword.text.length > 5 &&
-                      signUpPassword.text != signUpConfirmPassword.text) {
-                    hideSnackBar();
-                    return "Password and Confirm Password are not Same";
-                  }
-                  return null;
-                },
+                // validator: (conformPwd) {
+                //   // if (conformPwd.length < 6) {
+                //   //   hideSnackBar();
+                //   //   return "Password must be at least 6 characters long";
+                //   // }
+                //   // if (signUpPassword.text.length > 5 &&
+                //   //     signUpPassword.text != conformPwd) {
+                //   //   hideSnackBar();
+                //   //   return "Password and Confirm Password are not Same";
+                //   // }
+                //   return null;
+                // },
                 controller: signUpConfirmPassword,
                 obscureText: showPassword,
                 textInputAction: TextInputAction.done,
@@ -555,6 +557,10 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Styles.colorCustom,
               onPressed: () async {
+                if (signUpConfirmPassword.text != signUpPassword.text) {
+                  notify(
+                      context, 'Passwords do not match', "'Password' and 'Confirm Password' must be the same");
+                }
                 loadingSnackBarAndMessage('Signing you up...');
                 FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
