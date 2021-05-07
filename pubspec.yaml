@@ -33,10 +33,12 @@ dependencies:
   hive_flutter: ^1.0.0
   google_fonts: ^2.0.0
   lint: ^1.0.0
-  fluttertoast: ^8.0.3
+  fluttertoast: ^8.0.6
   flutter_native_splash: ^1.1.4+1
   ionicons: ^0.1.2
   giffy_dialog: ^1.8.0
+  flutter_twitter: ^1.1.3
+
 
 
 
