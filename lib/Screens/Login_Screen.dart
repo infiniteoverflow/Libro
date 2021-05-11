@@ -12,6 +12,8 @@ import 'package:book_donation/Screens/email_verification_screen.dart';
 import 'package:book_donation/Screens/home_screen.dart';
 
 import '../router/route_constants.dart';
+import 'package:book_donation/Services/twitter_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: file_names
@@ -398,16 +400,35 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.15,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/twitter.png"),
-                      fit: BoxFit.cover),
+              InkWell(
+                onTap: () async {
+                  bool result = await twitterSignIn();
+                  print(result);
+                  if (result == true) {
+                    Navigator.pushNamed(context, homeRoute, arguments: true);
+                  } else if(result==false){
+                    Fluttertoast.showToast(
+                        msg: "Some error occured try again later",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                  }
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/twitter.png"),
+                        fit: BoxFit.cover),
+                  ),
                 ),
-              ),
+              )
             ]),
           ],
         ),
@@ -626,34 +647,53 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               InkWell(
-                  onTap: () {
-                    handleFacebookSignin().then((signInDone) {
-                      if (signInDone) {
-                        Navigator.pushNamed(context, homeRoute,
-                            arguments: true);
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.width * 0.15,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/fb.png"),
-                          fit: BoxFit.cover),
-                    ),
-                  )),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.15,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/twitter.png"),
-                      fit: BoxFit.cover),
+                onTap: () {
+                  handleFacebookSignin().then((signInDone) {
+                    if (signInDone) {
+                      Navigator.pushNamed(context, homeRoute, arguments: true);
+                    }
+                  });
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/fb.png"),
+                        fit: BoxFit.cover),
+                  ),
                 ),
               ),
+              InkWell(
+                onTap: () async {
+                  bool result = await twitterSignIn();
+                  if (result == true) {
+                    Navigator.pushNamed(context, homeRoute, arguments: true);
+                  }
+                  else if(result == false){
+                    Fluttertoast.showToast(
+                        msg: "Some error occured try again later",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                  }
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/twitter.png"),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              )
             ]),
           ],
         ),
