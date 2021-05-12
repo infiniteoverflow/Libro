@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DateTime currentBackPressTime;
-
+  bool _isLoggedin = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
 
@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     checkAuthentication();
+    getuser();
     super.initState();
   }
 
@@ -65,6 +66,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //end of functions for signout
+
+  getuser() async {
+    User firebaseUser = _auth.currentUser;
+    await firebaseUser?.reload();
+    firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      await setState(() {
+        this.user = firebaseUser;
+        _isLoggedin = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        drawer: MainDrawer(signOut),
+        drawer: MainDrawer(signOut, user),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Container(
           padding: EdgeInsets.all(7),
@@ -605,10 +618,12 @@ class CategoryItemWidget extends StatelessWidget {
 
 class MainDrawer extends StatelessWidget {
   Function signOut;
+  User user;
+  MainDrawer(this.signOut, this.user);
 
-  MainDrawer(this.signOut);
   @override
   Widget build(BuildContext context) {
+    String firstTwoLetters = user.displayName.substring(0, 2);
     return Drawer(
       child: Column(
         children: [
@@ -631,11 +646,11 @@ class MainDrawer extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 28,
-                child: Text("AS"),
+                child: Text(user.displayName.substring(0, 2).toUpperCase()),
                 backgroundColor: Colors.white,
               ),
               title: Text(
-                "Ananth Sai",
+                "${user.displayName}",
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
@@ -643,7 +658,7 @@ class MainDrawer extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "ananth@gmail.com",
+                "${user.email}",
                 overflow: TextOverflow.ellipsis,
               ),
             ),
