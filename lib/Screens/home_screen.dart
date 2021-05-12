@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DateTime currentBackPressTime;
-
+  bool _isLoggedin = false;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User user;
 
@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     checkAuthentication();
+    getuser();
     super.initState();
   }
 
@@ -65,6 +66,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //end of functions for signout
+
+  getuser() async {
+    User firebaseUser = _auth.currentUser;
+    await firebaseUser?.reload();
+    firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      setState(() {
+        this.user = firebaseUser;
+        _isLoggedin = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -635,7 +648,7 @@ class MainDrawer extends StatelessWidget {
                 backgroundColor: Colors.white,
               ),
               title: Text(
-                "Ananth Sai",
+                "ANANTH SAI",
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontWeight: FontWeight.w500,

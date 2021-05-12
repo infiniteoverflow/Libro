@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   final signUpEmailAddress = TextEditingController();
   final signUpPassword = TextEditingController();
   final signUpConfirmPassword = TextEditingController();
+  String userName;
 
   // Make Form Key for Sign-Up or Log-In
   final _signUpFormKey = GlobalKey<FormState>();
@@ -406,7 +407,7 @@ class _LoginPageState extends State<LoginPage> {
                   print(result);
                   if (result == true) {
                     Navigator.pushNamed(context, homeRoute, arguments: true);
-                  } else if(result==false){
+                  } else if (result == false) {
                     Fluttertoast.showToast(
                         msg: "Some error occured try again later",
                         toastLength: Toast.LENGTH_SHORT,
@@ -414,8 +415,7 @@ class _LoginPageState extends State<LoginPage> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.black,
                         textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                        fontSize: 16.0);
                   }
                 },
                 child: Container(
@@ -449,16 +449,50 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                // validator: (mail) {
-                //   if (mail.isEmpty) {
-                //     hideSnackBar();
-                //     return "Please Give a Valid Email";
-                //   } else if (mail.contains('@') && mail.contains('.com')) {
-                //     return null;
-                //   }
-                //   hideSnackBar();
-                //   return "Not an Email Structure";
-                // },
+                validator: (name) {
+                  if (name.isEmpty) {
+                    hideSnackBar();
+                    return "Please enter a username.";
+                  }
+                  return null;
+                },
+                //controller: userName,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  hintText: "Username",
+                  hintStyle: TextStyle(color: Styles.textField),
+                  filled: true,
+                  fillColor: Styles.textFieldBorder,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Styles.colorCustom),
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Styles.textFieldBorder),
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                ),
+                onSaved: (value) {
+                  userName = value;
+                },
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: TextFormField(
+                validator: (mail) {
+                  if (mail.isEmpty) {
+                    hideSnackBar();
+                    return "Please Give a Valid Email";
+                  } else if (mail.contains('@') && mail.contains('.com')) {
+                    return null;
+                  }
+                  hideSnackBar();
+                  return "Not an Email Structure";
+                },
                 controller: signUpEmailAddress,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -483,13 +517,13 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                // validator: (pwd) {
-                //   if (pwd.length < 6) {
-                //     hideSnackBar();
-                //     return "Password must be at least 6 characters long";
-                //   }
-                //   return null;
-                // },
+                validator: (pwd) {
+                  if (pwd.length < 6) {
+                    hideSnackBar();
+                    return "Password must be at least 6 characters long";
+                  }
+                  return null;
+                },
                 controller: signUpPassword,
                 obscureText: showPassword,
                 textInputAction: TextInputAction.next,
@@ -526,18 +560,18 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
-                // validator: (conformPwd) {
-                //   // if (conformPwd.length < 6) {
-                //   //   hideSnackBar();
-                //   //   return "Password must be at least 6 characters long";
-                //   // }
-                //   // if (signUpPassword.text.length > 5 &&
-                //   //     signUpPassword.text != conformPwd) {
-                //   //   hideSnackBar();
-                //   //   return "Password and Confirm Password are not Same";
-                //   // }
-                //   return null;
-                // },
+                validator: (conformPwd) {
+                  if (conformPwd.length < 6) {
+                    hideSnackBar();
+                    return "Password must be at least 6 characters long";
+                  }
+                  if (signUpPassword.text.length > 5 &&
+                      signUpPassword.text != conformPwd) {
+                    hideSnackBar();
+                    return "Password and Confirm Password are not Same";
+                  }
+                  return null;
+                },
                 controller: signUpConfirmPassword,
                 obscureText: showPassword,
                 textInputAction: TextInputAction.done,
@@ -579,16 +613,21 @@ class _LoginPageState extends State<LoginPage> {
               color: Styles.colorCustom,
               onPressed: () async {
                 if (signUpConfirmPassword.text != signUpPassword.text) {
-                  notify(
-                      context, 'Passwords do not match', "'Password' and 'Confirm Password' must be the same");
+                  notify(context, 'Passwords do not match',
+                      "'Password' and 'Confirm Password' must be the same");
                 }
                 loadingSnackBarAndMessage('Signing you up...');
+                _signUpFormKey.currentState.save();
                 FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
                         email: signUpEmailAddress.text,
                         password: signUpPassword.text)
                     .then((signedUpUser) async {
                   await signedUpUser.user.sendEmailVerification();
+
+                  await FirebaseAuth.instance.currentUser
+                      .updateProfile(displayName: userName);
+
                   hideSnackBar();
                   notify(context, "Congrats! Sign up Complete",
                       "Please Log-In to Continue");
@@ -670,8 +709,7 @@ class _LoginPageState extends State<LoginPage> {
                   bool result = await twitterSignIn();
                   if (result == true) {
                     Navigator.pushNamed(context, homeRoute, arguments: true);
-                  }
-                  else if(result == false){
+                  } else if (result == false) {
                     Fluttertoast.showToast(
                         msg: "Some error occured try again later",
                         toastLength: Toast.LENGTH_SHORT,
@@ -679,8 +717,7 @@ class _LoginPageState extends State<LoginPage> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.black,
                         textColor: Colors.white,
-                        fontSize: 16.0
-                    );
+                        fontSize: 16.0);
                   }
                 },
                 child: Container(
