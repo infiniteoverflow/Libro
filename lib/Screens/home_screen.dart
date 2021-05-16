@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './chat_screen.dart';
 import './profile_screen.dart';
 import './notifs_screen.dart';
+import './book_description.dart';
 import './about_libro_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -493,64 +494,69 @@ class BookItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      height: 210,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2),
-            child: Container(
-              height: 160,
-              width: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(img),
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Description()));
+        },
+        child: Container(
+          height: 210,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: Container(
+                  height: 160,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(img),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 120,
-            child: Text(
-              author,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              softWrap: false,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Colors.blueGrey[300],
+              const SizedBox(
+                height: 20,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          SizedBox(
-            width: 120,
-            child: Text(
-              name,
-              overflow: TextOverflow.ellipsis,
-              softWrap: false,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+              SizedBox(
+                width: 120,
+                child: Text(
+                  author,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blueGrey[300],
+                  ),
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 5,
+              ),
+              SizedBox(
+                width: 120,
+                child: Text(
+                  name,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 
