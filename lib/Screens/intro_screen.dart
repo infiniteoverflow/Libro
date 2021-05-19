@@ -109,7 +109,6 @@ class IntroductionState extends State<Introduction> {
                   child: const AutoSizeText(
                     'CONTINUE',
                     maxFontSize: 36,
-                    minFontSize: 21,
                     maxLines: 1,
                     style: TextStyle(
                         fontFamily: 'HanaleiFill',
