@@ -3,9 +3,12 @@ import 'package:book_donation/widgets/contributor_tile.dart';
 import 'package:flutter/material.dart';
 
 class AboutLibroScreen extends StatelessWidget {
-  static const String routeName = 'about-screen';
+  static const String routeName = '/about-libro';
   @override
   Widget build(BuildContext context) {
+
+    print("About Screen");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -9,6 +9,8 @@ class ContributorService {
         'https://api.github.com/repos/infiniteoverflow/Libro/contributors';
     Uri uri = Uri.parse(contributorsUrl);
     final http.Response response = await http.get(uri);
+    print(response.statusCode);
+    print(response.body);
     var fetchedData = jsonDecode(response.body);
     fetchedData.forEach(
       (element) {
