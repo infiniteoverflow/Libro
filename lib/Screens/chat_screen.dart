@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Utils/Styles.dart';
 import './conversations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -153,12 +154,12 @@ class ChatsData extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return ChatConversations();
-                        },
-                      ),
-                    );
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return ChatConversations();
+            },
+          ),
+        );
       },
       child: Container(
           margin: EdgeInsets.only(left: 16, right: 16, top: 20),
