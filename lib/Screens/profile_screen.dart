@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Utils/Styles.dart';
 
 class ProfileScreen extends StatelessWidget {
-
+  User user;
+  ProfileScreen(this.user);
   Widget profileCard() {
     return Container(
       decoration: BoxDecoration(
@@ -26,7 +28,14 @@ class ProfileScreen extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage('assets/images/Reading.png'),
+                child: Text(
+                  user.displayName.substring(0, 2).toUpperCase(),
+                  style: TextStyle(
+                    color: Styles.profileBar,
+                  ),
+                ),
+                backgroundColor: Colors.white,
+                //backgroundImage: AssetImage('assets/images/Reading.png'),
               ),
               SizedBox(
                 width: 8,
@@ -35,11 +44,11 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Naruto Uzamaki',
+                    user.displayName,
                     style: TextStyle(color: Colors.white, fontSize: 17.0),
                   ),
                   Text(
-                    'uzamakinaruto@gmail.com',
+                    user.email,
                     style: TextStyle(fontSize: 13, color: Colors.white54),
                   ),
                 ],
@@ -135,53 +144,75 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.only(top: 30, left: 16),
-                      child: Text("GENERAL",style:TextStyle(fontSize:18.0,fontFamily: 'Jua',)),),
+                    margin: EdgeInsets.only(top: 30, left: 16),
+                    child: Text("GENERAL",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontFamily: 'Jua',
+                        )),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
                     decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Styles.shadowColor,
-                          blurRadius: 10,
-                          spreadRadius: 2)
-                    ],
-                    border: Border.all(color: Colors.transparent),
-                    borderRadius: BorderRadius.all(Radius.circular(0))),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Styles.shadowColor,
+                              blurRadius: 10,
+                              spreadRadius: 2)
+                        ],
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.all(Radius.circular(0))),
                     child: Column(
                       children: <Widget>[
                         profOption("assets/images/person.png", "Personal Data"),
-                        Padding(padding: EdgeInsets.only(left:15.0,right:15.0),
-                        child: Divider(height: 0.2,), ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: Divider(
+                            height: 0.2,
+                          ),
+                        ),
                         profOption("assets/images/fav.png", "Favourites"),
-                        Padding(padding: EdgeInsets.only(left:15.0,right:15.0),
-                        child: Divider(height: 0.2,), ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: Divider(
+                            height: 0.2,
+                          ),
+                        ),
                         profOption("assets/images/bookmark.png", "Bookmarks"),
-                        Padding(padding: EdgeInsets.only(left:15.0,right:15.0),
-                        child: Divider(height: 0.2,), ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                          child: Divider(
+                            height: 0.2,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 25, left: 16),
-                      child: Text("SETTINGS",style:TextStyle(fontSize:18.0,fontFamily: 'Jua',)),),
+                    margin: EdgeInsets.only(top: 25, left: 16),
+                    child: Text("SETTINGS",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontFamily: 'Jua',
+                        )),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Container(
                     decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Styles.shadowColor,
-                          blurRadius: 10,
-                          spreadRadius: 2)
-                    ],
-                    border: Border.all(color: Colors.transparent),
-                    borderRadius: BorderRadius.all(Radius.circular(0))),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Styles.shadowColor,
+                              blurRadius: 10,
+                              spreadRadius: 2)
+                        ],
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.all(Radius.circular(0))),
                     child: Column(
                       children: <Widget>[
                         profOption("assets/images/settings.png", "Settings"),
