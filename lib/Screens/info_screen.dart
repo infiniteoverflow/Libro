@@ -133,7 +133,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       controller: emailController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
-                        hintText: "Email Address",
+                        hintText: "Enter your Email Address",
                         hintStyle: TextStyle(color: Styles.textField),
                         filled: true,
                         fillColor: Styles.textFieldBorder,
