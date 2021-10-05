@@ -637,8 +637,8 @@ class _LoginPageState extends State<LoginPage> {
                   if (e
                       .toString()
                       .contains('[firebase_auth/email-already-in-use]')) {
-                    notify(context, 'Email in Use',
-                        'Use another Email to Sign Up');
+                    notify(context, 'Email already exists',
+                        'Please Log-in using that');
                   }
 
                   if (e.toString().contains('[firebase_auth/weak-password]')) {
