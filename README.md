@@ -11,6 +11,8 @@ An App Built using flutter using which we can share books with people around us 
 
 </div>
 
+![](poster.png)
+
 # Features:✨
 * A book Sharing App.
 * This app helps you find the books you want easily.
