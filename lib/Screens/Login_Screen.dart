@@ -33,6 +33,10 @@ class _LoginPageState extends State<LoginPage> {
   final signUpEmailAddress = TextEditingController();
   final signUpPassword = TextEditingController();
   final signUpConfirmPassword = TextEditingController();
+
+  //for userName TextFields
+
+  final userNameController = TextEditingController();
   String userName;
 
   // Make Form Key for Sign-Up or Log-In
@@ -104,9 +108,9 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.of(context).size.width - 0,
               decoration: BoxDecoration(
                 color: Styles.scaffoldColor,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(45.0),
-                    topRight: Radius.circular(45.0)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(45.0),
+                ),
               ),
               child: SingleChildScrollView(
                 child: Column(
@@ -117,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                         // TODO:
                         /// Crash the app once to set up crashlytics in firebase
                         /// to be done on iOS (uncomment below iconbutton wiget and crashlytics import at the top)
-
                         // IconButton(
                         //     icon: const Icon(Icons.dangerous),
                         //     onPressed: () {
@@ -301,7 +304,6 @@ class _LoginPageState extends State<LoginPage> {
               color: Styles.colorCustom,
               onPressed: () async {
                 loadingSnackBarAndMessage('Logging you in...');
-
                 if (_logInFormKey.currentState.validate()) {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
@@ -310,11 +312,9 @@ class _LoginPageState extends State<LoginPage> {
                       .then((signedInUser) {
                     final bool response =
                         FirebaseAuth.instance.currentUser.emailVerified;
-
                     hideSnackBar();
-
                     if (response) {
-                      print("User Id is: ${signedInUser.user.uid}");
+                      print("User Id is: ${signedInUser.user.email}");
                       notify(context, "Congrats! Log-in Complete",
                           "Enjoy this app");
                       Navigator.pushNamed(context, homeRoute);
@@ -458,6 +458,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 //controller: userName,
                 textInputAction: TextInputAction.next,
+                controller: userNameController,
                 decoration: InputDecoration(
                   hintText: "Username",
                   hintStyle: TextStyle(color: Styles.textField),
@@ -624,13 +625,12 @@ class _LoginPageState extends State<LoginPage> {
                         password: signUpPassword.text)
                     .then((signedUpUser) async {
                   await signedUpUser.user.sendEmailVerification();
-
                   await FirebaseAuth.instance.currentUser
                       .updateProfile(displayName: userName);
-
                   hideSnackBar();
                   notify(context, "Congrats! Sign up Complete",
                       "Please Log-In to Continue");
+                  clearFields();
                 }).catchError((e, StackTrace s) {
                   FirebaseCrashlytics.instance.recordError(e.toString(), s);
 
@@ -808,5 +808,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
           );
         });
+  }
+
+  void clearFields() {
+    userNameController.clear();
+    signUpEmailAddress.clear();
+    signUpPassword.clear();
+    signUpConfirmPassword.clear();
   }
 }
