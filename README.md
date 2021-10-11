@@ -29,10 +29,7 @@ To follow our sprints and workflow install [zenhub extension](https://www.zenhub
 
 **Google Services Files for running the app :**   
 
-**For Android :** https://drive.google.com/file/d/1xLvwVTZQ3EWYl1uBna2IPp46hsjBQ8ul/view?usp=sharing
-
-**For IOS :** https://drive.google.com/file/d/1Ldd2BefPp8EOU-pffbxMLc-IXwPlc8XX/view?usp=sharing
-
+Drive Link : https://drive.google.com/drive/folders/161WwprL9P_mHqdln_S0Zfm2bVnQSI1Dc?usp=sharing
 
 ## Tentative UI Design:🎨
 
