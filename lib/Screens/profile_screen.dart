@@ -1,3 +1,4 @@
+import '../Screens/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Utils/Styles.dart';
@@ -5,7 +6,7 @@ import '../Utils/Styles.dart';
 class ProfileScreen extends StatelessWidget {
   User user;
   ProfileScreen(this.user);
-  Widget profileCard() {
+  Widget profileCard(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -28,14 +29,7 @@ class ProfileScreen extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 radius: 30,
-                child: Text(
-                  user.displayName.substring(0, 2).toUpperCase(),
-                  style: TextStyle(
-                    color: Styles.profileBar,
-                  ),
-                ),
-                backgroundColor: Colors.white,
-                //backgroundImage: AssetImage('assets/images/Reading.png'),
+                backgroundImage: NetworkImage(user.photoURL ?? 'https://cdn.icon-icons.com/icons2/2120/PNG/512/user_account_person_avatar_icon_131248.png'),
               ),
               SizedBox(
                 width: 8,
@@ -55,13 +49,24 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            padding: EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0), color: Colors.white),
-            child: Text(
-              'Edit',
-              style: TextStyle(color: Styles.profileBar, fontSize: 16),
+          GestureDetector(
+            onTap: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return EditProfileScreen(user);
+                  },
+                ),
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.only(left: 12, right: 12, top: 4, bottom: 4),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0), color: Colors.white),
+              child: Text(
+                'Edit',
+                style: TextStyle(color: Styles.profileBar, fontSize: 16),
+              ),
             ),
           ),
         ],
@@ -136,7 +141,7 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              profileCard(),
+              profileCard(context),
               SizedBox(
                 height: 15,
               ),

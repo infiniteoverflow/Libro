@@ -652,8 +652,7 @@ class MainDrawer extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 28,
-                child: Text(user.displayName.substring(0, 2).toUpperCase()),
-                backgroundColor: Colors.white,
+                backgroundImage: NetworkImage(user.photoURL ?? 'https://cdn.icon-icons.com/icons2/2120/PNG/512/user_account_person_avatar_icon_131248.png'),
               ),
               title: Text(
                 "${user.displayName}",
